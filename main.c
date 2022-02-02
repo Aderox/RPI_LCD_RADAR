@@ -441,6 +441,9 @@ int main(int argc,char *argv[]) {
 	lcd_fillRGB(0xFF, 0x00, 0x00);
     delayms(500);
     lcd_fillframeRGB(20, 20, 30, 30, 0x00, 0x00, 0xFF);
+	lcd_fillframeRGB(100, 50, 25, 37, 0xFF, 0x00, 0xFF);
+    lcd_fillframeRGB(340, 70, 99, 24, 0x00, 0xFF, 0xFF);
+
 	delayms(500);
 	lcd_img("radar.bmp", 50, 5);
 	delayms(500);
