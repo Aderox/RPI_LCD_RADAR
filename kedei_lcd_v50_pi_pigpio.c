@@ -384,7 +384,7 @@ void loop() {
 	delayms(500);
 }
 
-
+/*
 int main(int argc,char *argv[]) {
 
 	lcd_open();
@@ -424,4 +424,34 @@ int main(int argc,char *argv[]) {
 
 	lcd_close();
 }
+*/
 
+int main(int argc,char *argv[]) {
+/**/
+    lcd_open();
+
+	lcd_init();
+
+	lcd_fill(0); //black out the screen.
+
+	// 24bit Bitmap only
+	lcd_img("emilia.bmp", 5, 5);
+	delayms(500);
+
+	lcd_fillRGB(0xFF, 0x00, 0x00);
+    delayms(500);
+    lcd_fillframeRGB(20, 20, 30, 30, 0x00, 0x00, 0xFF);
+	delayms(500);
+	lcd_img("radar.bmp", 50, 5);
+	delayms(500);
+
+	// Demo
+	color=0;
+	lcd_rotation=0;
+	loop();	loop();	loop();
+
+	// 24bit Bitmap only
+	lcd_img("radar.bmp", 50, 5);
+
+	lcd_close();
+}
