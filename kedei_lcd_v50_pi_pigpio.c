@@ -449,7 +449,11 @@ int main(int argc,char *argv[]) {
 	color=0;
 	lcd_rotation=0;
 	loop();	loop();	loop();
-
+	
+	lcd_img("emilia.bmp", 0, 0);
+	delayms(2000);
+	
+	lcd_fillRGB(0x00, 0x00, 0x00);
 	// 24bit Bitmap only
 	lcd_img("radar.bmp", 50, 5);
 
