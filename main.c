@@ -459,6 +459,7 @@ int main(int argc,char *argv[]) {
 	lcd_fillRGB(0x00, 0x00, 0x00);
 	// 24bit Bitmap only
 	lcd_img("radar.bmp", 50, 5);
+	lcd_fillframeRGB(0, 0, 10, 10, 0x00, 0xFF, 0xFF);
 
 	lcd_close();
 }
