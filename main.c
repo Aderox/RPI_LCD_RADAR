@@ -434,6 +434,8 @@ int main(int argc,char *argv[]) {
 	POINT Ap = {0,0};
 	POINT center = {156,156};
 	float angle = 0;
+	int imgpersec = -1;
+	float seconde = 0;
 	while(1){
 		//lcd_img("radar.bmp", 0, 0);
 
@@ -450,6 +452,14 @@ int main(int argc,char *argv[]) {
 
 		angle+=0.01;
 		printf("angle: %f\n", angle);
+		
+		seconde+=33;
+		imgpersec++;
+		if(seconde >= 1000){
+			seconde = 0;
+			imgpersec = 0;
+			printf("imgpersec: %d\n", imgpersec);
+		}
 		delayms(33);
 	}
 	lcd_close();
