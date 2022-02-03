@@ -447,6 +447,9 @@ int main(int argc,char *argv[]) {
 	lcd_fillframeRGB(100, 50, 25, 37, 0xFF, 0x00, 0xFF);
     lcd_fillframeRGB(340, 70, 99, 24, 0x00, 0xFF, 0xFF);
 
+	lcd_fillRGB(0x00, 0x00, 0x00);
+
+	delayms(100);
 	// 24bit Bitmap only
 	lcd_img("emilia.bmp", 5, 5);
 	delayms(500);
@@ -477,13 +480,13 @@ int main(int argc,char *argv[]) {
 		//A = rotate_point(center, A, angle);
 		//x = (x-xm)*cos(PI*angle/180) - (y-ym)*sin(PI*angle/180) + xm;
 		//y = (x-xm)*sin(PI*angle/180) + (y-ym)*cos(PI*angle/180) + ym;
-		A.x = cos(angle*PI/180)+center.x;
-		A.y = sin(angle*PI/180)+center.y;
-		lcd_fillframeRGB(A.x, A.y, 5, 5, 0xFF, 0x00, 0x00);
+		A.x = cos((PI/180)*angle)*center.x;
+		A.y = sin((PI/180)*angle)*center.y;
+		lcd_fillframeRGB(A.x+2, A.y+2, 4, 4, 0xFF, 0x00, 0x00);
 
-		Ap.x = cos(PI/180)*center.x;
-		Ap.y = sin(PI/180)*center.y;
-		lcd_fillframeRGB(Ap.x, Ap.y, 5, 5, 0x00, 0xFF, 0x00);
+		Ap.x = cos((PI/180)+angle)*center.x;
+		Ap.y = sin((PI/180)+angle)*center.y;
+		lcd_fillframeRGB(Ap.x+2, Ap.y+2, 4, 4, 0x00, 0x00, 0xFF);
 
 		angle+=0.01;
 		printf("angle: %f\n", angle);
