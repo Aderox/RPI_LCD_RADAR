@@ -6,4 +6,3 @@ struct POINT {
 };
 
 
-POINT rotate_point(POINT center,POINT p, float angle);
