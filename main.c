@@ -390,48 +390,6 @@ void loop() {
 	delayms(500);
 }
 
-/*
-int main(int argc,char *argv[]) {
-
-	lcd_open();
-
-	lcd_init();
-
-	lcd_fill(0); //black out the screen.
-
-	// 24bit Bitmap only
-	lcd_img("kedei_lcd_v50_pi.bmp", 50, 5);
-	delayms(500);
-
-	lcd_fillRGB(0xFF, 0x00, 0x00);
-	lcd_fillRGB(0x00, 0xFF, 0x00);
-	lcd_fillRGB(0xFF, 0xFF, 0x00);
-	lcd_fillRGB(0x00, 0x00, 0xFF);
-	lcd_fillRGB(0xFF, 0x00, 0xFF);
-	lcd_fillRGB(0x00, 0xFF, 0xFF);
-	lcd_fillRGB(0xFF, 0xFF, 0xFF);
-	lcd_fillRGB(0x00, 0x00, 0x00);
-
-	// 24bit Bitmap only
-	lcd_img("kedei_lcd_v50_pi.bmp", 50, 5);
-	delayms(500);
-
-	// Demo
-	color=0;
-	lcd_rotation=0;
-	loop();	loop();	loop();	loop();
-	loop();	loop();	loop();	loop();
-	loop();	loop();	loop();	loop();
-	loop();	loop();	loop();	loop();
-	loop();
-
-	// 24bit Bitmap only
-	lcd_img("kedei_lcd_v50_pi.bmp", 50, 5);
-
-	lcd_close();
-}
-*/
-
 int main(int argc,char *argv[]) {
 /**/
     lcd_open();
@@ -471,26 +429,27 @@ int main(int argc,char *argv[]) {
 	x = xm + (x-xm)*cos(θ) - (y-ym)*sin(θ)
 	y = ym + (x-xm)*sin(θ) + (y-ym)*cos(θ)
 	*/
+
 	POINT A = {0,0};
 	POINT Ap = {0,0};
 	POINT center = {156,156};
 	float angle = 0;
 	while(1){
-		
-		//A = rotate_point(center, A, angle);
-		//x = (x-xm)*cos(PI*angle/180) - (y-ym)*sin(PI*angle/180) + xm;
-		//y = (x-xm)*sin(PI*angle/180) + (y-ym)*cos(PI*angle/180) + ym;
+		//lcd_img("radar.bmp", 0, 0);
+
+		//point 0;0
+		lcd_fillframeRGB(center.x, center.y, 1, 1, 0xF, 0xF, 0xFF);
+
+		//center
+		lcd_fillframeRGB(center.x-5, center.y-5, 10, 10, 0xFF, 0x00, 0xFF);
+		lcd_fillframeRGB(center.x, center.y, 1, 1, 0xFF, 0xFF, 0xFF);
+
 		A.x = cos((PI/180)*angle)*center.x;
 		A.y = sin((PI/180)*angle)*center.y;
 		lcd_fillframeRGB(A.x+2, A.y+2, 4, 4, 0xFF, 0x00, 0x00);
 
-		Ap.x = cos((PI/180)+angle)*center.x;
-		Ap.y = sin((PI/180)+angle)*center.y;
-		lcd_fillframeRGB(Ap.x+2, Ap.y+2, 4, 4, 0x00, 0x00, 0xFF);
-
 		angle+=0.01;
 		printf("angle: %f\n", angle);
-		lcd_img("radar.bmp", 0, 0);
 		delayms(33);
 	}
 	lcd_close();
