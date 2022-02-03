@@ -490,6 +490,7 @@ int main(int argc,char *argv[]) {
 
 		angle+=0.01;
 		printf("angle: %f\n", angle);
+		lcd_img("radar.bmp", 0, 0);
 		delayms(33);
 	}
 	lcd_close();
