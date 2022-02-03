@@ -21,6 +21,12 @@
 #include <sys/ioctl.h>
 #include <time.h>
 #include <pigpio.h>
+#include <math.h>  
+
+
+#define PI 3.14159265358979323846
+#define DEG2RAD(x) ((x) * PI / 180)
+#define RAD2DEG(x) ((x) * 180 / PI)
 
 #define LCD_CS 1
 #define TOUCH_CS 0
@@ -458,8 +464,24 @@ int main(int argc,char *argv[]) {
 	
 	lcd_fillRGB(0x00, 0x00, 0x00);
 	// 24bit Bitmap only
-	lcd_img("radar.bmp", 50, 5);
-	lcd_fillframeRGB(0, 0, 10, 10, 0x00, 0xFF, 0xFF);
+	lcd_img("radar.bmp", 0, 0);
 
+	/*
+	milieu du radar 156;156
+	on doit donc tourner des points autours du milieu
+	formule: Soit A(x,y) pour tourner A autour de M(xm, ym) d'un angle θ:
+	x = xm + (x-xm)*cos(θ) - (y-ym)*sin(θ)
+	y = ym + (x-xm)*sin(θ) + (y-ym)*cos(θ)
+	*/
+	lcd_fillframeRGB(0, 0, 10, 10, 0x00, 0xFF, 0xFF);
+	int x,y = 0,0;
+	float angle = 0;
+	while(true){
+		lcd_fillframeRGB(x, y, 10, 10, 0x00, 0xFF, 0xFF);
+		x = (x-156)*cos(PI*angle/180) - (y-156)*sin(PI*angle/180) + 156;
+		y = (x-156)*sin(PI*angle/180) + (y-156)*cos(PI*angle/180) + 156;
+		angle++;
+		delayms(33);
+	}
 	lcd_close();
 }
