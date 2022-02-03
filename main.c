@@ -481,8 +481,8 @@ int main(int argc,char *argv[]) {
 		A.y = sin(angle*PI/180)+center.y;
 		lcd_fillframeRGB(A.x, A.y, 5, 5, 0xFF, 0x00, 0x00);
 
-		Ap.x = cos((angle+90)*PI/180)*center.x;
-		Ap.y = sin((angle+90)*PI/180)*center.y;
+		Ap.x = cos(*PI/180)*center.x;
+		Ap.y = sin(*PI/180)*center.y;
 		lcd_fillframeRGB(Ap.x, Ap.y, 5, 5, 0x00, 0xFF, 0x00);
 
 		angle+=0.01;
