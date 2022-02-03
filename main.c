@@ -457,7 +457,7 @@ int main(int argc,char *argv[]) {
 	// Demo
 	color=0;
 	lcd_rotation=0;
-	loop();	loop();	loop();
+	//loop();	loop();	loop();
 	
 	lcd_img("emilia.bmp", 0, 0);
 	delayms(2000);
@@ -478,10 +478,10 @@ int main(int argc,char *argv[]) {
 	int y = 0;
 	float angle = 0;
 	while(1){
-		lcd_fillframeRGB(x, y, 1, 1, 0xBA, 0x55, 0xD3);
+		lcd_fillframeRGB(x, y, 5, 5, 0xBA, 0x55, 0xD3);
 		x = (x-156)*cos(PI*angle/180) - (y-156)*sin(PI*angle/180) + 156;
 		y = (x-156)*sin(PI*angle/180) + (y-156)*cos(PI*angle/180) + 156;
-		angle++;
+		angle+=0.1;
 		delayms(33);
 	}
 	lcd_close();
