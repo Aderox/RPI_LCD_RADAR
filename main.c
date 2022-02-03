@@ -469,16 +469,22 @@ int main(int argc,char *argv[]) {
 	y = ym + (x-xm)*sin(θ) + (y-ym)*cos(θ)
 	*/
 	POINT A = {0,0};
+	POINT Ap = {0,0};
 	POINT center = {156,156};
 	float angle = 0;
 	while(1){
-		lcd_fillframeRGB(A.x, A.y, 5, 5, 0xFF, 0x00, 0x00);
 		
 		//A = rotate_point(center, A, angle);
 		//x = (x-xm)*cos(PI*angle/180) - (y-ym)*sin(PI*angle/180) + xm;
 		//y = (x-xm)*sin(PI*angle/180) + (y-ym)*cos(PI*angle/180) + ym;
 		A.x = cos(angle*PI/180)+center.x;
 		A.y = sin(angle*PI/180)+center.y;
+		lcd_fillframeRGB(A.x, A.y, 5, 5, 0xFF, 0x00, 0x00);
+
+		Ap.x = cos((angle+90)*PI/180)*center.x;
+		Ap.y = sin((angle+90)*PI/180)*center.y;
+		lcd_fillframeRGB(Ap.x, Ap.y, 5, 5, 0x00, 0xFF, 0x00);
+
 		angle+=0.01;
 		printf("angle: %f\n", angle);
 		delayms(33);
