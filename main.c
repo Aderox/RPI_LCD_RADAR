@@ -442,15 +442,13 @@ int main(int argc,char *argv[]) {
 
 	lcd_fillRGB(0xFF, 0x00, 0x00);
 
-	// 24bit Bitmap only
-	lcd_img("emilia.bmp", 5, 5);
-	delayms(1000);
-
     delayms(500);
     lcd_fillframeRGB(20, 20, 30, 30, 0x00, 0x00, 0xFF);
 	lcd_fillframeRGB(100, 50, 25, 37, 0xFF, 0x00, 0xFF);
     lcd_fillframeRGB(340, 70, 99, 24, 0x00, 0xFF, 0xFF);
 
+	// 24bit Bitmap only
+	lcd_img("emilia.bmp", 5, 5);
 	delayms(500);
 	lcd_img("radar.bmp", 50, 5);
 	delayms(500);
@@ -459,10 +457,6 @@ int main(int argc,char *argv[]) {
 	color=0;
 	lcd_rotation=0;
 	//loop();	loop();	loop();
-	
-	lcd_img("emilia.bmp", 0, 0);
-	delayms(2000);
-	
 	lcd_fillRGB(0x00, 0x00, 0x00);
 	// 24bit Bitmap only
 	lcd_img("radar.bmp", 0, 0);
@@ -474,7 +468,6 @@ int main(int argc,char *argv[]) {
 	x = xm + (x-xm)*cos(θ) - (y-ym)*sin(θ)
 	y = ym + (x-xm)*sin(θ) + (y-ym)*cos(θ)
 	*/
-	lcd_fillframeRGB(0, 0, 10, 10, 0x00, 0xFF, 0xFF);
 	POINT A = {0,0};
 	POINT center = {156,156};
 	float angle = 0;
