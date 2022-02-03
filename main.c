@@ -481,7 +481,8 @@ int main(int argc,char *argv[]) {
 		lcd_fillframeRGB(x, y, 5, 5, 0xBA, 0x55, 0xD3);
 		x = (x-156)*cos(PI*angle/180) - (y-156)*sin(PI*angle/180) + 156;
 		y = (x-156)*sin(PI*angle/180) + (y-156)*cos(PI*angle/180) + 156;
-		angle+=0.1;
+		angle+=0.01;
+		printf("angle: %f\n", angle);
 		delayms(33);
 	}
 	lcd_close();
