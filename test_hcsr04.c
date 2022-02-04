@@ -21,7 +21,7 @@ void pulseIn(){
     printf("[INFO] Et pouf le signal est en haut, a t=%f\n", start);
     //unsigned long i = 0;
     while(gpioRead(GPIO_ECHO) == 1){                                        //TODO ADD TIMEOUT
-       //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
+       printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
        //on attend que le signal soit en bas
     }
     end = gpioTick();
