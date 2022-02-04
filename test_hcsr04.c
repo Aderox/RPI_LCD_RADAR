@@ -23,8 +23,7 @@ int main(int argc, char *argv[])
     }
 
     gpioSetMode(GPIO_PIN, PI_OUTPUT);
-    gpioServo(GPIO_PIN, 1000000);
-
+    
     time_sleep(1);
     while (1)
     {
