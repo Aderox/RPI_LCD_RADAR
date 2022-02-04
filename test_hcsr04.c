@@ -25,9 +25,7 @@ int main(int argc, char *argv[])
 
     gpioSetMode(GPIO_PIN, PI_OUTPUT);
 
-    time_sleep(1);
     printf("on bip:\n");
-    time_sleep()
     while (1)
     {
         gpioWrite(GPIO_PIN, 0); /* on */
