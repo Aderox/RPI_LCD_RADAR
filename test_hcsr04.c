@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
         lowHigh = highLow = echo = previousEcho = 0;
         while(0 == lowHigh || highLow == 0) {
             previousEcho = echo;
-            echo = digitalRead(GPIO_ECHO);
+            echo = gpioRead(GPIO_ECHO);
             if(0 == lowHigh && 0 == previousEcho && 1 == echo) {
             lowHigh = 1;
             startTime = getMicrotime();
