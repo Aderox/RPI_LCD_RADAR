@@ -57,12 +57,12 @@ int main(int argc, char *argv[])
                 endTime = time_time();
             }
             //printf("value: %d\n", value);
-        }*/
+        }
 
         printf("la valeur n'est pas nul !\n");
         endTime = time_time();
         distance = ((endTime - startTime) * 34300) / 2;
-        printf("=== distance: %d cm ===\n", distance);
+        printf("=== distance: %d cm ===\n", distance);*/
 
 
         time_sleep(0.1);
