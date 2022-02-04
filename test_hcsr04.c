@@ -75,10 +75,10 @@ int main(int argc, char *argv[])
         poke();
 
         
-        uint32_t start = 0;
-        uint32_t end = 0;
-        uint32_t startLoop = 0;
-        uint32_t endLoop = 0;
+        double start = 0;
+        double end = 0;
+        double startLoop = 0;
+        double endLoop = 0;
         while(gpioRead(GPIO_ECHO) == 0){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en haut
