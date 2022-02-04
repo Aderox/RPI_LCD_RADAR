@@ -14,12 +14,18 @@
 #define GPIO_ECHO 13 //fil marron
 
 void pulseIn(){
+    double start = time_time();
+    double end = 0;
+
     //printf("[INFO] Start pulseIn\n");
-    printf("[INFO] Et pouf le signale est en haut, a t=%ld\n", time_time());
-    while(gpioRead(GPIO_ECHO) == 1){
+    printf("[INFO] Et pouf le signale est en haut, a t=%f\n", time_time());
+    while(gpioRead(GPIO_ECHO) == 1){                                        //TODO ADD TIMEOUT
         printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
     }
-    printf("[INFO] fin du truc, a t=%ld\n", time_time());
+    end = time_time();
+    printf("[INFO] fin du truc, a t=%f\n", end);
+    printf("[INFO] Différence entre les deux: %f\n", end - start);
+    printf("[INFO] Distance: %f\n", (end - start)*340/2);
     return;
 }
 
