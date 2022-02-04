@@ -45,22 +45,30 @@ int main(int argc, char *argv[])
 
         double startTime = 0;
         double endTime = 0;
+        double timeOut = time_time() + 3;
         //pulse in
         value = gpioRead(GPIO_ECHO);
-        while(gpioRead(GPIO_ECHO) == value)
+        while(gpioRead(GPIO_ECHO) == value && time_time() < timeOut)
         {
             //printf("[DEBUG] low value: %d\n", gpioRead(GPIO_ECHO));
             startTime = time_time();
         }
-        while(gpioRead(GPIO_ECHO) != value)
+        while(gpioRead(GPIO_ECHO) != value && time_time() < timeOut)
         {
             printf("[DEBUG] hight value: %d\n", gpioRead(GPIO_ECHO));
             endTime = time_time();
         }
-        printf("diff time: %lf\n", endTime - startTime);
-        
-        distance = (endTime - startTime) * 340 * 100 / 2;
-        printf("distance: %lfcm\n", distance);
+
+        if(time_time() < timeOut)
+        {
+            //printf("diff time: %lf\n", endTime - startTime);
+            distance = (endTime - startTime) * 340 * 100 / 2;
+            printf("distance: %lfcm\n", distance);
+        }
+        else
+        {
+            printf("timeout\n");
+        }
 
         time_sleep(1);
         //int timeOut = time_time()+5;
