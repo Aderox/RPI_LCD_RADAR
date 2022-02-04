@@ -24,8 +24,8 @@ void pulseIn(int gpio, int level, uint32_t tick)
     while(gpioRead(GPIO_ECHO) == 1){                                        //TODO ADD TIMEOUT
        printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
        //on attend que le signal soit en bas
+        end = gpioTick();
     }
-    end = gpioTick();
     //end = gpioTick();
     printf("[INFO] fin du truc, a t=%f\n", end);
     printf("[INFO] Différence entre les deux: %f\n", end - tick);
@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
     gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     while (1)
     {   
+        printf("lessgo :");
         //supply power to vcc in order to start measurement and sleep 10 us
         poke();
         time_sleep(3);
