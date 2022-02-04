@@ -15,6 +15,7 @@
 
 void pulseIn(int gpio, int level, uint32_t tick)
 {
+    tick = gpioTick();
     uint32_t end = 0;
 
     //printf("[INFO] Start pulseIn\n");
