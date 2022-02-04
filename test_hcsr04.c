@@ -61,14 +61,27 @@ int main(int argc, char *argv[])
     int value = 0;
 
     printf("time: %lf \n", time_time());
-    gpioSetAlertFunc(GPIO_ECHO, pulseIn);
+    //gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     while (1)
     {   
         printf("lessgo :");
         //supply power to vcc in order to start measurement and sleep 10 us
         poke();
+
+        while(gpioRead(GPIO_ECHO) == 0){
+            //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
+            //on attend que le signal soit en haut
+        }    
+        uint32_t start = gpioTick();
+        while(gpioRead(GPIO_ECHO) == 1){
+            //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
+            //on attend que le signal soit en bas
+        }
+        uint32_t end = gpioTick();
+        printf("[INFO] Différence entre les deux: %f\n", end - start);
+
         time_sleep(3);
-        
+
         
         
         
