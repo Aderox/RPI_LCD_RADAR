@@ -435,12 +435,12 @@ int main(int argc,char *argv[]) {
 	int imgpersec = 0;
 	float seconde = 0;
 
-	const int mSPF = 16.67; //60 fps = 16.67 ms
+	const int mSPF = 33; //30 fps = 1/30*1000 = 33.33ms per frame
 	while(1){
 		lcd_img("radar.bmp", 0, 0);
 
 		//point 0;0
-		lcd_fillframeRGB(0, 0, 5, 5, 0xFF, 0xFF, 0xFF);
+		//lcd_fillframeRGB(0, 0, 5, 5, 0xFF, 0xFF, 0xFF);
 
 		//center
 		//lcd_fillframeRGB(center.x-5, center.y-5, 10, 10, 0xFF, 0x00, 0xFF);
@@ -456,7 +456,7 @@ int main(int argc,char *argv[]) {
 		}
 		
 
-		angle+=1;
+		angle+=4;
 		printf("angle: %f\n", angle);
 		
 		seconde+=mSPF;
