@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
     double distance = 0;
     int value = 0;
 
-    printf("time: %zu \n", gpioTick());
+    printf("time: %f \n", time_time());
     //gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     while (1)
     {   
@@ -73,14 +73,14 @@ int main(int argc, char *argv[])
         while(gpioRead(GPIO_ECHO) == 0){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en haut
-            start = gpioTick();
+            start = time_time();
         }    
         while(gpioRead(GPIO_ECHO) == 1){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en bas
-            end = gpioTick();
+            end = time_time();
         }
-        printf("[INFO] Différence entre les deux: %zu   us\n", (end - start));
+        printf("[INFO] Différence entre les deux: %f   us\n", (end - start));
 
         time_sleep(3);
        /* uint32_t start = gpioTick();
