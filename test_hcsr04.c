@@ -73,13 +73,15 @@ int main(int argc, char *argv[])
         while(gpioRead(GPIO_ECHO) == 0){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en haut
-            start = time_time();
-        }    
+            usleep(1);
+        }
+        start = time_time();
         while(gpioRead(GPIO_ECHO) == 1){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en bas
-            end = time_time();
+            usleep(1);
         }
+        end = time_time();
         printf("[INFO] Différence entre les deux: %f   us\n", (end - start));
 
         time_sleep(3);
