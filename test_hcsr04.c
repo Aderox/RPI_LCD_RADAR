@@ -29,11 +29,11 @@ int main(int argc, char *argv[])
 
     printf("on bip:\n");
 
-    double startTime = 0;
-    double endTime = 0;
-    int distance = 0;
+    double distance = 0;
     int value = 0;
     int previousValue = 0;
+
+    printf("time: %lf \n", time_time());
     while (1)
     {   
         //supply power to vcc in order to start measurement and sleep 10 us
@@ -43,7 +43,8 @@ int main(int argc, char *argv[])
 
         //read value from ECHO pin
 
-
+        double startTime = 0;
+        double endTime = 0;
         //pulse in
         value = gpioRead(GPIO_ECHO);
         while(gpioRead(GPIO_ECHO) == value)
@@ -56,7 +57,11 @@ int main(int argc, char *argv[])
             printf("[DEBUG] hight value: %d\n", gpioRead(GPIO_ECHO));
             endTime = time_time();
         }
-        printf("diff time: %d\n", endTime - startTime);
+        printf("diff time: %lf\n", endTime - startTime);
+        
+        distance = (endTime - startTime) * 340 * 100 / 2;
+        printf("distance: %lfcm\n", distance);
+
         time_sleep(1);
         //int timeOut = time_time()+5;
 
