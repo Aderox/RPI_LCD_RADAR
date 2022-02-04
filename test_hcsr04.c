@@ -64,7 +64,8 @@ int main(int argc, char *argv[])
             double diffTime = endTime - startTime;
             printf("[DEBUG] diffTime: %lf\n", diffTime);
 
-            distance = ((endTime - startTime)*340*100)/2;; 
+            //distance = ((endTime - startTime)*340*100)/2;; 
+            distance = diffTime / 0.000058;
             printf("Distance: %lfcm\n", distance);
         }
         else
