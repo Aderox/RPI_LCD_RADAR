@@ -12,6 +12,7 @@
 
 #define GPIO_TRIG 26 //fil rouge
 #define GPIO_ECHO 13 //fil marron
+#define SOUND_SPEED = 340.0 / 1000;
 
 int main(int argc, char *argv[])
 {   
@@ -55,14 +56,16 @@ int main(int argc, char *argv[])
         }
         while(gpioRead(GPIO_ECHO) != value && time_time() < timeOut)
         {
-            printf("[DEBUG] hight value: %d\n", gpioRead(GPIO_ECHO));
+            //printf("[DEBUG] hight value: %d\n", gpioRead(GPIO_ECHO));
             endTime = time_time();
         }
 
         if(time_time() < timeOut)
         {
             //printf("diff time: %lf\n", endTime - startTime);
-            distance = (endTime - startTime) * 340 * 100 / 2;
+            double diffTime = endTime - startTime;
+
+            distance = diffTime / 2.0 * SOUND_SPEED; 
             printf("distance: %lfcm\n", distance);
         }
         else
