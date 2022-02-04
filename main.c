@@ -440,7 +440,7 @@ int main(int argc,char *argv[]) {
 		//lcd_img("radar.bmp", 0, 0);
 
 		//point 0;0
-		lcd_fillframeRGB(center.x, center.y, 1, 1, 0xF, 0xF, 0xFF);
+		lcd_fillframeRGB(center.x, center.y, 5, 5, 0xFF, 0xFF, 0xFF);
 
 		//center
 		lcd_fillframeRGB(center.x-5, center.y-5, 10, 10, 0xFF, 0x00, 0xFF);
@@ -454,7 +454,7 @@ int main(int argc,char *argv[]) {
 		
 		lcd_fillframeRGB(A.x+2, A.y+2, 4, 4, 0xFF, 0x00, 0x00);
 
-		angle+=0.01;
+		angle+=1;
 		printf("angle: %f\n", angle);
 		
 		seconde+=33;
