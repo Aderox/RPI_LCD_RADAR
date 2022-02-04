@@ -33,27 +33,39 @@ int main(int argc, char *argv[])
     int endTime = 0;
     int distance = 0;
     int value = 0;
+    int previousValue = 0;
     while (1)
     {   
-        //supply power to vcc in order to start measurement and time_sleep 10 us
+        //supply power to vcc in order to start measurement and sleep 10 us
         gpioWrite(GPIO_TRIG, 1);
-        time_sleep(0.00001);
+        usleep(10);
         gpioWrite(GPIO_TRIG, 0);
 
         //read value from ECHO pin
         value = gpioRead(GPIO_ECHO);
-
-        printf("value: %d\n", value);
-        while (value == 0)
-        {
-            printf("null\n");
-            value = gpioRead(GPIO_ECHO);
-            startTime = time_time();
+        if(value != 0){
+            printf("value: %d\n", value);
         }
+        
+        startTime = time_time();
+        /*while(value == 0)
+        {
+            previousValue = value;
+            value = gpioRead(GPIO_ECHO);
+            if(value == 1)
+            {
+                endTime = time_time();
+            }
+            //printf("value: %d\n", value);
+        }*/
+
         printf("la valeur n'est pas nul !\n");
         endTime = time_time();
         distance = ((endTime - startTime) * 34300) / 2;
         printf("=== distance: %d cm ===\n", distance);
+
+
+        time_sleep(0.1);
     }
 
     gpioTerminate();
