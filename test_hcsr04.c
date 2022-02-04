@@ -60,11 +60,11 @@ int main(int argc, char *argv[])
     int value = 0;
 
     printf("time: %lf \n", time_time());
+    gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     while (1)
     {   
         //supply power to vcc in order to start measurement and sleep 10 us
         poke();
-        gpioSetAlertFunc(GPIO_ECHO, pulseIn);
         time_sleep(1.5);
         
         
