@@ -10,8 +10,8 @@
 #include <pigpio.h>
 #include <math.h>
 
-#define GPIO_VCC 26 //fil noire
-#define GPIO_ECHO 13 //fil blanc
+#define GPIO_TRIG 26 //fil rouge
+#define GPIO_ECHO 13 //fil marron
 
 int main(int argc, char *argv[])
 {   
@@ -24,16 +24,16 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    gpioSetMode(GPIO_VCC, PI_OUTPUT);
+    gpioSetMode(GPIO_TRIG, PI_OUTPUT);
     gpioSetMode(GPIO_ECHO, PI_INPUT);
 
     printf("on bip:\n");
     while (1)
     {   
         //supply power to vcc in order to start measurement and time_sleep 10 us
-        gpioWrite(GPIO_VCC, 1);
+        gpioWrite(GPIO_TRIG, 1);
         time_sleep(0.00001);
-        gpioWrite(GPIO_VCC, 0);
+        gpioWrite(GPIO_TRIG, 0);
 
         //read value from ECHO pin
         int value = gpioRead(GPIO_ECHO);
