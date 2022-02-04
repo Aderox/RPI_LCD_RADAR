@@ -47,7 +47,23 @@ int main(int argc, char *argv[])
             printf("value: %d\n", value);
         }
         
-        startTime = time_time();
+        int timeOut = time_time()+5;
+
+        while(gpioRead(GPIO_ECHO) == 0 && (timeOut) > time_time())
+        {
+            //printf("%d\n", gpioRead(GPIO_ECHO));
+            startTime = time_time();
+        }
+        while(gpioRead(GPIO_ECHO) == 1 && (timeOut) > time_time())
+        {
+            //printf("%d\n", gpioRead(GPIO_ECHO));
+            printf("read=1\n");
+            endTime = time_time();
+        }
+
+        printf("time out. difftemps: %d\n", startTime - endTime);
+
+
         /*while(value == 0)
         {
             previousValue = value;
