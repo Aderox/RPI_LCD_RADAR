@@ -12,7 +12,7 @@
 
 #define GPIO_TRIG 26 //fil rouge
 #define GPIO_ECHO 13 //fil marron
-#define SOUND_SPEED = 340.0 / 1000;
+#define SOUND_SPEED 340.0 / 1000.0
 
 int main(int argc, char *argv[])
 {   
