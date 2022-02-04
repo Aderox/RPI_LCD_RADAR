@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
     double distance = 0;
     int value = 0;
 
-    printf("time: %lf \n", gpioTick());
+    printf("time: %zu \n", gpioTick());
     //gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     while (1)
     {   
