@@ -15,12 +15,12 @@
 
 void pulseIn(int gpio, int level, uint32_t tick)
 {
-    tick = gpioTick();
+    uint32_t start = gpioTick();
     uint32_t end = 0;
 
     //printf("[INFO] Start pulseIn\n");
     printf("[INFO] gpio %d\n", gpio);
-    printf("[INFO] Et pouf le signal est en haut (%d), a t=%f\n", level, tick);
+    printf("[INFO] Et pouf le signal est en haut (%d), a t=%f\n", level, start);
     //unsigned long i = 0;
     while(gpioRead(GPIO_ECHO) == 1){                                        //TODO ADD TIMEOUT
        printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
@@ -29,8 +29,8 @@ void pulseIn(int gpio, int level, uint32_t tick)
     }
     //end = gpioTick();
     printf("[INFO] fin du truc, a t=%f\n", end);
-    printf("[INFO] Différence entre les deux: %f\n", end - tick);
-    printf("[INFO] Distance: %f\n", (end - tick)/0.58);
+    printf("[INFO] Différence entre les deux: %f\n", end - start);
+    printf("[INFO] Distance: %f\n", (end - start)/0.58);
     return;
 }
 
