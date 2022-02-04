@@ -48,14 +48,16 @@ int main(int argc, char *argv[])
         value = gpioRead(GPIO_ECHO);
         while(gpioRead(GPIO_ECHO) == value)
         {
+            printf("[DEBUG] low value: %d\n", gpioRead(GPIO_ECHO));
             startTime = time_time();
         }
         while(gpioRead(GPIO_ECHO) != value)
         {
+            printf("[DEBUG] hight value: %d\n", gpioRead(GPIO_ECHO));
             endTime = time_time();
         }
         printf("diff time: %d\n", endTime - startTime);
-
+        time_sleep(1);
         //int timeOut = time_time()+5;
 
         /*while(gpioRead(GPIO_ECHO) == 0)// && (timeOut) > time_time())
@@ -88,9 +90,6 @@ int main(int argc, char *argv[])
         endTime = time_time();
         distance = ((endTime - startTime) * 34300) / 2;
         printf("=== distance: %d cm ===\n", distance);*/
-
-
-        time_sleep(0.1);
     }
 
     gpioTerminate();
