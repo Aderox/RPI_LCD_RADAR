@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
         double startTime = 0;
         double endTime = 0;
-        double timeOut = time_time() + 0.5;
+        double timeOut = time_time() + 1;
         //pulse in
         value = gpioRead(GPIO_ECHO);
         while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut)
