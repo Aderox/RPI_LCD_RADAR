@@ -10,79 +10,28 @@
 #include <pigpio.h>
 #include <math.h>
 
-#define GPIO_TRIG 26 // fil rouge
-#define GPIO_ECHO 13 // fil marron
+#define GPIO_TRIG 26 //fil rouge
+#define GPIO_ECHO 13 //fil marron
 
-volatile uint32_t before;  // used for sonar distance
-
-int last_range = 0;	     // last sonar reading
-
-void delay(int ms) {  // delay in miliseconds
-    gpioDelay(1000*ms); 
+void pulseIn(){
+    printf("[INFO] Start pulseIn\n");
+    
 }
 
-void ping(void)
-{ // send out an ultrasonic 'ping'
-
-    before = 0xffffffff; // set for guard variable
-
-    gpioSetMode(GPIO_TRIG, PI_OUTPUT);
-
-    // trigger a sonar pulse
-
-    gpioWrite(GPIO_TRIG, PI_OFF);
-    gpioDelay(5);
-    gpioWrite(GPIO_TRIG, PI_ON);
-    gpioDelay(10);
-    gpioWrite(GPIO_TRIG, PI_OFF);
-    gpioDelay(5);
-
-    gpioSetMode(GPIO_ECHO, PI_INPUT);
-
-    before = gpioTick(); // get tick right after sending pulse
-}
-
-void range(int gpio, int level, uint32_t tick)
-{
-
-    static uint32_t startTick, endTick;
-
-    uint32_t diffTick;
-
-    if (tick > before)
-    { // make sure we don't measure trigger pulse
-
-        if (level == PI_ON)
-        { // start counting on rising edge
-            startTick = tick;
-        }
-        else
-
-            if (level == PI_OFF)
-        { // stop counting on falling edge
-
-            endTick = tick;
-            diffTick = (endTick - startTick) / 58;
-
-            last_range = diffTick;
-
-            if (diffTick < 600)
-                printf("%u\n", diffTick);
-            else
-            {
-                printf("OUT OF RANGE"); // for seeedstudio sensor
-                last_range = 0;
-            }
-        }
-    }
+void poke(){
+    usleep(1);
+    gpioWrite(GPIO_TRIG, 1);
+    usleep(10);
+    gpioWrite(GPIO_TRIG, 0);
+    usleep(1);
 }
 
 int main(int argc, char *argv[])
-{
+{   
     printf("salut \n");
     // branchelent: gnd sur 39 et trig sur 37
 
-    if (gpioInitialise() < 0)
+    if(gpioInitialise() < 0)
     {
         fprintf(stderr, "pigpio initialisation failed\n");
         return 1;
@@ -98,39 +47,13 @@ int main(int argc, char *argv[])
 
     printf("time: %lf \n", time_time());
     while (1)
-    {
-        // supply power to vcc in order to start measurement and sleep 10 us
-        int i, n;
-        char buff[128], ch;
-
-        if (gpioInitialise() < 0)
-            return 1;
-
-        gpioSetMode(GPIO_ECHO, PI_INPUT);
-
-        // register callback on change of sonar pin
-        gpioSetAlertFunc(GPIO_ECHO, range);
-
-        sleep(2);
-
-        while (1)
-        {
-
-            ping(); // prime the last_range variable
-            sleep(1);
-
-            printf("distance: %d \n", last_range);
-        }
-
-        sleep(1);
-
-        puts("Bye now!");
-
-        gpioTerminate();
-
-        return 0;
+    {   
+        //supply power to vcc in order to start measurement and sleep 10 us
+        poke();
+        gpioSetAlertFunc(GPIO_ECHO, pulseIn);
+        
         /*
-
+    
         //read value from ECHO pin
 
         double startTime = 0;
@@ -154,7 +77,7 @@ int main(int argc, char *argv[])
             double diffTime = endTime - startTime;
             printf("[DEBUG] diffTime: %lf\n", diffTime);
 
-            //distance = ((endTime - startTime)*340*100)/2;;
+            //distance = ((endTime - startTime)*340*100)/2;; 
             distance = diffTime / 0.000058;
             printf("Distance: %lfcm\n", distance);
         }
