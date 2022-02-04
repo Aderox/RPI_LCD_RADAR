@@ -42,18 +42,20 @@ int main(int argc, char *argv[])
         gpioWrite(GPIO_TRIG, 0);
 
         //read value from ECHO pin
-        startTime = time_time();
-        while(1){
-            value = gpioRead(GPIO_ECHO);
-            if(value != 0){
-                endTime = time_time();
-                printf("diff temps: %d\n", endTime - startTime);
-                break;
-            }else{
-                //0
-            }
+
+
+        //pulse in
+        value = gpioRead(GPIO_ECHO);
+        while(gpioRead(GPIO_ECHO) == value)
+        {
+            startTime = time_time();
         }
-        
+        while(gpioRead(GPIO_ECHO) != value)
+        {
+            endTime = time_time();
+        }
+        printf("diff time: %d\n", endTime - startTime);
+
         //int timeOut = time_time()+5;
 
         /*while(gpioRead(GPIO_ECHO) == 0)// && (timeOut) > time_time())
