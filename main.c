@@ -449,10 +449,10 @@ int main(int argc,char *argv[]) {
 		
 		//A.x = cos((PI/180)*angle)*center.x;
 		//A.y = sin((PI/180)*angle)*center.y;
-		for(float i = 1; i < 300; i++){
+		for(float i = 1; i < 302; i++){
 			A.x = (i/2)*(cos((PI/180)*angle)) + center.x;
 			A.y = (i/2)*(sin((PI/180)*angle)) + center.y;
-			lcd_fillframeRGB(A.x, A.y, 2, 2, 0x00, 0xFF, 0x00);
+			lcd_fillframeRGB(A.x, A.y, 1, 1, 0x00, 0xFF, 0x00);
 		}
 		
 
