@@ -407,12 +407,10 @@ int main(int argc,char *argv[]) {
 
 	lcd_fillRGB(0x00, 0x00, 0x00);
 
-	delayms(100);
+	delayms(500);
 	// 24bit Bitmap only
 	lcd_img("emilia.bmp", 5, 5);
-	delayms(500);
-	lcd_img("radar.bmp", 50, 5);
-	delayms(500);
+	delayms(250);
 
 	// Demo
 	color=0;
@@ -440,36 +438,35 @@ int main(int argc,char *argv[]) {
 	const int mSPF = 60; //60 ms per seconds
 	while(1){
 		lcd_img("radar.bmp", 0, 0);
-		delayms(5);
-
+		
 		//point 0;0
 		lcd_fillframeRGB(0, 0, 5, 5, 0xFF, 0xFF, 0xFF);
 
 		//center
-		lcd_fillframeRGB(center.x-5, center.y-5, 10, 10, 0xFF, 0x00, 0xFF);
+		//lcd_fillframeRGB(center.x-5, center.y-5, 10, 10, 0xFF, 0x00, 0xFF);
 		lcd_fillframeRGB(center.x, center.y, 1, 1, 0xFF, 0xFF, 0xFF);
 
 		
 		//A.x = cos((PI/180)*angle)*center.x;
 		//A.y = sin((PI/180)*angle)*center.y;
-		for(float i = 1; i < 100; i++){
+		for(float i = 1; i < 255; i++){
 			A.x = (i/2)*(cos((PI/180)*angle)) + center.x;
 			A.y = (i/2)*(sin((PI/180)*angle)) + center.y;
-			lcd_fillframeRGB(A.x+2, A.y+2, 4, 4, 0xFF, i, 0x00);
+			lcd_fillframeRGB(A.x, A.y, 2, 2, 0x00, 0xFF, 0x00);
 		}
 		
 
-		angle+=1;
+		angle+=10;
 		printf("angle: %f\n", angle);
 		
-		seconde+=60;
+		seconde+=mSPF;
 		imgpersec++;
 		if(seconde >= 1000){
 			seconde = 0;
 			printf("========imgpersec: %d==========\n", imgpersec);
 			imgpersec = 0;
 		}
-		delayms(60);
+		delayms(mSPF);
 	}
 	lcd_close();
 }
