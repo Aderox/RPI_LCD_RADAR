@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
         value = gpioRead(GPIO_ECHO);
         while(gpioRead(GPIO_ECHO) == value)
         {
-            printf("[DEBUG] low value: %d\n", gpioRead(GPIO_ECHO));
+            //printf("[DEBUG] low value: %d\n", gpioRead(GPIO_ECHO));
             startTime = time_time();
         }
         while(gpioRead(GPIO_ECHO) != value)
