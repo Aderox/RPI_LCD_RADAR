@@ -19,12 +19,12 @@ void pulseIn(){
 
     //printf("[INFO] Start pulseIn\n");
     printf("[INFO] Et pouf le signal est en haut, a t=%f\n", start);
-    unsigned long i = 0;
+    //unsigned long i = 0;
     while(gpioRead(GPIO_ECHO) == 1){                                        //TODO ADD TIMEOUT
        //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
-       i++;
+        end = gpioTick();
     }
-    end = gpioTick();
+    //end = gpioTick();
     printf("[INFO] i=%ld\n", i);
     printf("[INFO] fin du truc, a t=%f\n", end);
     printf("[INFO] Différence entre les deux: %f\n", end - start);
