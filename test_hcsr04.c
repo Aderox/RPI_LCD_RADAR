@@ -15,9 +15,11 @@
 
 void pulseIn(){
     //printf("[INFO] Start pulseIn\n");
+    printf("[INFO] Et pouf le signale est en haut, a t=%ld\n", time_time());
     while(gpioRead(GPIO_ECHO) == 1){
         printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
     }
+    printf("[INFO] fin du truc, a t=%ld\n", time_time());
     return;
 }
 
@@ -54,7 +56,7 @@ int main(int argc, char *argv[])
         //supply power to vcc in order to start measurement and sleep 10 us
         poke();
         gpioSetAlertFunc(GPIO_ECHO, pulseIn);
-        
+        time_sleep(1);
         /*
     
         //read value from ECHO pin
