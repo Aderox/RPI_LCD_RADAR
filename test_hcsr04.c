@@ -28,6 +28,11 @@ int main(int argc, char *argv[])
     gpioSetMode(GPIO_ECHO, PI_INPUT);
 
     printf("on bip:\n");
+
+    int startTime = 0;
+    int endTime = 0;
+    int distance = 0;
+    int value = 0;
     while (1)
     {   
         //supply power to vcc in order to start measurement and time_sleep 10 us
@@ -36,9 +41,19 @@ int main(int argc, char *argv[])
         gpioWrite(GPIO_TRIG, 0);
 
         //read value from ECHO pin
-        int value = gpioRead(GPIO_ECHO);
-        printf("value: %d\n", value);
-        time_sleep(0.1);
+        value = gpioRead(GPIO_ECHO);
+
+        pritnf("value: %d\n", value);
+        while (value == 0)
+        {
+            printf("la valeur est nul ! (comme cesariou)");
+            value = gpioRead(GPIO_ECHO);
+            startTime = time_time();
+        }
+        printf("la valeur n'est pas nul !\n");
+        endTime = time_time();
+        distance = ((endTime - startTime) * 34300) / 2;
+        printf("=== distance: %d cm ===\n", distance);
     }
 
     gpioTerminate();
