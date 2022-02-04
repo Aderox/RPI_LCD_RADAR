@@ -14,6 +14,12 @@ int main(int argc, char *argv[])
 {
     // branchelent: gnd sur 39 et trig sur 37
 
+    if(gpioInitialise() < 0)
+    {
+        fprintf(stderr, "pigpio initialisation failed\n");
+        return 1;
+    }
+
     gpioSetMode(37, PI_OUTPUT);
     gpioServo(37, 1000000);
 
