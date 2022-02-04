@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
     printf("on bip:\n");
     while (1)
     {
-        gpioWrite(GPIO_PIN, 0); /* on */
-        time_sleep(0.05);
+        gpioWrite(GPIO_PIN, 1); /* on */
+        time_sleep(0.5);
         gpioWrite(GPIO_PIN, 0);
         time_sleep(0.5);
     }
