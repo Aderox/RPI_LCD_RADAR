@@ -10,6 +10,8 @@
 #include <pigpio.h>
 #include <math.h>
 
+#define GPIO_PIN 25
+
 int main(int argc, char *argv[])
 {
     // branchelent: gnd sur 39 et trig sur 37
@@ -20,14 +22,14 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    gpioSetMode(37, PI_OUTPUT);
-    gpioServo(37, 1000000);
+    gpioSetMode(GPIO_PIN, PI_OUTPUT);
+    gpioServo(GPIO_PIN, 1000000);
 
     time_sleep(1);
     while (1)
     {
-        gpioWrite(18, 1); /* on */
+        gpioWrite(GPIO_PIN, 1); /* on */
         time_sleep(0.5);
-        gpioWrite(18, 0);
+        gpioWrite(GPIO_PIN, 0);
     }
 }
