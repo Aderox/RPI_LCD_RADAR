@@ -13,7 +13,8 @@
 #define GPIO_PIN 26
 
 int main(int argc, char *argv[])
-{
+{   
+    printf("salut \n");
     // branchelent: gnd sur 39 et trig sur 37
 
     if(gpioInitialise() < 0)
@@ -26,11 +27,13 @@ int main(int argc, char *argv[])
 
     time_sleep(1);
     printf("on bip:\n");
+    time_sleep()
     while (1)
     {
         gpioWrite(GPIO_PIN, 0); /* on */
-        time_sleep(200);
+        time_sleep(0.05);
         gpioWrite(GPIO_PIN, 0);
+        time_sleep(0.5);
     }
 
     gpioTerminate();
