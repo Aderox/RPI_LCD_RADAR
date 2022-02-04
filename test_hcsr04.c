@@ -85,14 +85,14 @@ int main(int argc, char *argv[])
             startLoop = time_time();
         }
         start = time_time();
-        printf("difference entre les deux: %f et %f\n", start, startLoop);
+        printf("difference entre les start: %f start et %f startLoop\n", start, startLoop);
         while(gpioRead(GPIO_ECHO) == 1){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en bas
             endLoop = time_time();
         }
         end = time_time();
-        printf("difference entre les deux: %f et %f\n", end, endLoop);
+        printf("difference entre les end: %f end et %f endLoop\n", end, endLoop);
 
         printf("[INFO] Différence entre les deux: %f   us\n", (end - start));
 
