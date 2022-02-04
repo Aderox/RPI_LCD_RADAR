@@ -446,8 +446,12 @@ int main(int argc,char *argv[]) {
 		lcd_fillframeRGB(center.x-5, center.y-5, 10, 10, 0xFF, 0x00, 0xFF);
 		lcd_fillframeRGB(center.x, center.y, 1, 1, 0xFF, 0xFF, 0xFF);
 
-		A.x = cos((PI/180)*angle)*center.x;
-		A.y = sin((PI/180)*angle)*center.y;
+		
+		//A.x = cos((PI/180)*angle)*center.x;
+		//A.y = sin((PI/180)*angle)*center.y;
+		A.x = cos((PI/180)*angle)*100 + center.x;
+		A.y = sin((PI/180)*angle)*100 + center.y;
+		
 		lcd_fillframeRGB(A.x+2, A.y+2, 4, 4, 0xFF, 0x00, 0x00);
 
 		angle+=0.01;
@@ -457,7 +461,7 @@ int main(int argc,char *argv[]) {
 		imgpersec++;
 		if(seconde >= 1000){
 			seconde = 0;
-			printf("========imgpersec: %d\n==============", imgpersec);
+			printf("========imgpersec: %d==========\n", imgpersec);
 			imgpersec = 0;
 		}
 		delayms(33);
