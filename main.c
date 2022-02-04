@@ -438,6 +438,7 @@ int main(int argc,char *argv[]) {
 	float seconde = 0;
 	while(1){
 		lcd_img("radar.bmp", 0, 0);
+		delayms(2);
 
 		//point 0;0
 		lcd_fillframeRGB(0, 0, 5, 5, 0xFF, 0xFF, 0xFF);
