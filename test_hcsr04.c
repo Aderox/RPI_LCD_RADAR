@@ -15,7 +15,7 @@
 
 void pulseIn(){
     //printf("[INFO] Start pulseIn\n");
-    printf("[INFO] readGpio: %d\n", readGpio(GPIO_ECHO));
+    printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
 }
 
 void poke(){
