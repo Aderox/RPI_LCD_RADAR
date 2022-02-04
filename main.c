@@ -390,7 +390,7 @@ void loop() {
 	delayms(500);
 }
 
-void rotateLine(POINT A, POINT center) {
+void rotateAroundCenter(POINT A, POINT center, float angle) {
 	for(float i = 1; i < 302; i++){
 			A.x = (i/2)*(cos((PI/180)*angle)) + center.x;
 			A.y = (i/2)*(sin((PI/180)*angle)) + center.y;
@@ -457,7 +457,7 @@ int main(int argc,char *argv[]) {
 		
 		//A.x = cos((PI/180)*angle)*center.x;
 		//A.y = sin((PI/180)*angle)*center.y;
-		rotateLine(A, center, angle);
+		rotateAroundCenter(A, center, angle);
 
 		angle+=4;
 		printf("angle: %f\n", angle);
