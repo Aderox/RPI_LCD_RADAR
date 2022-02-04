@@ -25,7 +25,6 @@ void pulseIn(){
         end = gpioTick();
     }
     //end = gpioTick();
-    printf("[INFO] i=%ld\n", i);
     printf("[INFO] fin du truc, a t=%f\n", end);
     printf("[INFO] Différence entre les deux: %f\n", end - start);
     printf("[INFO] Distance: %f\n", (end - start)/0.58);
