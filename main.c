@@ -436,9 +436,11 @@ int main(int argc,char *argv[]) {
 	float angle = 0;
 	int imgpersec = 0;
 	float seconde = 0;
+
+	const int mSPF = 60; //60 ms per seconds
 	while(1){
 		lcd_img("radar.bmp", 0, 0);
-		delayms(2);
+		delayms(5);
 
 		//point 0;0
 		lcd_fillframeRGB(0, 0, 5, 5, 0xFF, 0xFF, 0xFF);
@@ -450,22 +452,24 @@ int main(int argc,char *argv[]) {
 		
 		//A.x = cos((PI/180)*angle)*center.x;
 		//A.y = sin((PI/180)*angle)*center.y;
-		A.x = cos((PI/180)*angle)*100 + center.x;
-		A.y = sin((PI/180)*angle)*100 + center.y;
+		for(float i = 1; i < 100; i++){
+			A.x = (i/2)*(cos((PI/180)*angle)) + center.x;
+			A.y = (i/2)*(sin((PI/180)*angle)) + center.y;
+			lcd_fillframeRGB(A.x+2, A.y+2, 4, 4, 0xFF, i, 0x00);
+		}
 		
-		lcd_fillframeRGB(A.x+2, A.y+2, 4, 4, 0xFF, 0x00, 0x00);
 
 		angle+=1;
 		printf("angle: %f\n", angle);
 		
-		seconde+=33;
+		seconde+=60;
 		imgpersec++;
 		if(seconde >= 1000){
 			seconde = 0;
 			printf("========imgpersec: %d==========\n", imgpersec);
 			imgpersec = 0;
 		}
-		delayms(33);
+		delayms(60);
 	}
 	lcd_close();
 }
