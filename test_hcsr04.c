@@ -15,7 +15,10 @@
 
 void pulseIn(){
     //printf("[INFO] Start pulseIn\n");
-    printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
+    while(gpioRead(GPIO_ECHO) == 1){
+        printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
+    }
+    return;
 }
 
 void poke(){
