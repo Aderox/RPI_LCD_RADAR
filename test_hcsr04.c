@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         printf("value: %d\n", value);
         while (value == 0)
         {
-            printf("la valeur est nul ! (comme cesariou)");
+            printf("null\n");
             value = gpioRead(GPIO_ECHO);
             startTime = time_time();
         }
