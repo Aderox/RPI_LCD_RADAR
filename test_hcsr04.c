@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
         //read value from ECHO pin
         value = gpioRead(GPIO_ECHO);
 
-        pritnf("value: %d\n", value);
+        printf("value: %d\n", value);
         while (value == 0)
         {
             printf("la valeur est nul ! (comme cesariou)");
