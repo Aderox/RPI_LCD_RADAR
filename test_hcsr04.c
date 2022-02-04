@@ -38,7 +38,6 @@ void poke(){
     gpioWrite(GPIO_TRIG, 1);
     usleep(10);
     gpioWrite(GPIO_TRIG, 0);
-    usleep(1);
 }
 
 int main(int argc, char *argv[])
@@ -66,7 +65,7 @@ int main(int argc, char *argv[])
     {   
         //supply power to vcc in order to start measurement and sleep 10 us
         poke();
-        time_sleep(1.5);
+        time_sleep(3);
         
         
         
