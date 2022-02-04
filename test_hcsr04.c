@@ -48,12 +48,12 @@ int main(int argc, char *argv[])
         double timeOut = time_time() + 0.5;
         //pulse in
         value = gpioRead(GPIO_ECHO);
-        while(gpioRead(GPIO_ECHO) == value && time_time() < timeOut)
+        while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut)
         {
             //printf("[DEBUG] low value: %d\n", gpioRead(GPIO_ECHO));
             startTime = time_time();
         }
-        while(gpioRead(GPIO_ECHO) != value && time_time() < timeOut)
+        while(gpioRead(GPIO_ECHO) == 1 && time_time() < timeOut)
         {
             //printf("[DEBUG] hight value: %d\n", gpioRead(GPIO_ECHO));
             endTime = time_time();
