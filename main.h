@@ -1,4 +1,5 @@
 
+
 typedef struct POINT POINT;
 struct POINT {
     int x;
@@ -6,3 +7,4 @@ struct POINT {
 };
 
 
+void rotateLine(POINT A, POINT center);
