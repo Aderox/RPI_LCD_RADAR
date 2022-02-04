@@ -14,8 +14,8 @@
 #define GPIO_ECHO 13 //fil marron
 
 void pulseIn(){
-    printf("[INFO] Start pulseIn\n");
-    
+    //printf("[INFO] Start pulseIn\n");
+    printf("[INFO] readGpio: %d\n", readGpio(GPIO_ECHO));
 }
 
 void poke(){
