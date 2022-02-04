@@ -460,6 +460,7 @@ int main(int argc,char *argv[]) {
 		rotateAroundCenter(A, center, angle);
 
 		angle+=4;
+		if(angle >= 360) angle = 0;
 		printf("angle: %f\n", angle);
 		
 		seconde+=mSPF;
