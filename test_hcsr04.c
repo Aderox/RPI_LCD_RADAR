@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     while (1)
     {
         gpioWrite(GPIO_PIN, 1); /* on */
-        time_sleep(5);
+        time_sleep(200);
         gpioWrite(GPIO_PIN, 0);
     }
 
