@@ -68,16 +68,18 @@ int main(int argc, char *argv[])
         //supply power to vcc in order to start measurement and sleep 10 us
         poke();
 
+        uint32_t start = 0;
+        uint32_t end = 0;
         while(gpioRead(GPIO_ECHO) == 0){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en haut
+            start = gpioTick();
         }    
-        uint32_t start = gpioTick();
         while(gpioRead(GPIO_ECHO) == 1){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en bas
+            end = gpioTick();
         }
-        uint32_t end = gpioTick();
         printf("[INFO] Différence entre les deux: %zuus\n", (end - start));
 
         time_sleep(3);
