@@ -435,7 +435,7 @@ int main(int argc,char *argv[]) {
 	int imgpersec = 0;
 	float seconde = 0;
 
-	const int mSPF = 33; //60 ms per seconds
+	const int mSPF = 16.67; //60 fps = 16.67 ms
 	while(1){
 		lcd_img("radar.bmp", 0, 0);
 
@@ -456,15 +456,15 @@ int main(int argc,char *argv[]) {
 		}
 		
 
-		angle+=5;
+		angle+=1;
 		printf("angle: %f\n", angle);
 		
 		seconde+=mSPF;
 		imgpersec++;
 		if(seconde >= 1000){
-			seconde = 0;
 			printf("========imgpersec: %d==========\n", imgpersec);
 			imgpersec = 0;
+			seconde = 0;
 		}
 		delayms(mSPF);
 	}
