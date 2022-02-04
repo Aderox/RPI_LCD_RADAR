@@ -49,12 +49,12 @@ int main(int argc, char *argv[])
         
         int timeOut = time_time()+5;
 
-        while(gpioRead(GPIO_ECHO) == 0 && (timeOut) > time_time())
+        while(gpioRead(GPIO_ECHO) == 0)// && (timeOut) > time_time())
         {
             //printf("%d\n", gpioRead(GPIO_ECHO));
             startTime = time_time();
         }
-        while(gpioRead(GPIO_ECHO) == 1 && (timeOut) > time_time())
+        while(gpioRead(GPIO_ECHO) == 1)// && (timeOut) > time_time())
         {
             //printf("%d\n", gpioRead(GPIO_ECHO));
             printf("read=1\n");
