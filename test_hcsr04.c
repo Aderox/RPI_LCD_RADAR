@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
             //on attend que le signal soit en bas
         }
         uint32_t end = gpioTick();
-        printf("[INFO] Différence entre les deux: %zuus\n", (end - start);
+        printf("[INFO] Différence entre les deux: %zuus\n", (end - start));
 
         time_sleep(3);
        /* uint32_t start = gpioTick();
