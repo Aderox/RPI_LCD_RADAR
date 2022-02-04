@@ -10,7 +10,7 @@
 #include <pigpio.h>
 #include <math.h>
 
-#define GPIO_PIN 25
+#define GPIO_PIN 26
 
 int main(int argc, char *argv[])
 {
@@ -23,12 +23,15 @@ int main(int argc, char *argv[])
     }
 
     gpioSetMode(GPIO_PIN, PI_OUTPUT);
-    
+
     time_sleep(1);
+    printf("on bip: ");
     while (1)
     {
         gpioWrite(GPIO_PIN, 1); /* on */
-        time_sleep(0.5);
+        time_sleep(5);
         gpioWrite(GPIO_PIN, 0);
     }
+
+    gpioTerminate();
 }
