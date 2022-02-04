@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
 
     printf("on bip:\n");
 
-    int startTime = 0;
-    int endTime = 0;
+    double startTime = 0;
+    double endTime = 0;
     int distance = 0;
     int value = 0;
     int previousValue = 0;
