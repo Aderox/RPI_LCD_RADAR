@@ -25,10 +25,10 @@ int main(int argc, char *argv[])
     gpioSetMode(GPIO_PIN, PI_OUTPUT);
 
     time_sleep(1);
-    printf("on bip: ");
+    printf("on bip:\n");
     while (1)
     {
-        gpioWrite(GPIO_PIN, 1); /* on */
+        gpioWrite(GPIO_PIN, 0); /* on */
         time_sleep(200);
         gpioWrite(GPIO_PIN, 0);
     }
