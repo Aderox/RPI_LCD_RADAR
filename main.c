@@ -457,7 +457,7 @@ int main(int argc,char *argv[]) {
 		
 		//A.x = cos((PI/180)*angle)*center.x;
 		//A.y = sin((PI/180)*angle)*center.y;
-		rotateLine(A, center);
+		rotateLine(A, center, angle);
 
 		angle+=4;
 		printf("angle: %f\n", angle);

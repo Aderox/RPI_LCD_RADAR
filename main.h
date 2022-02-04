@@ -7,4 +7,4 @@ struct POINT {
 };
 
 
-void rotateLine(POINT A, POINT center);
+void rotateLine(POINT A, POINT center, float angle);
