@@ -40,12 +40,14 @@ int main(int argc, char *argv[])
         usleep(10);
         gpioWrite(GPIO_TRIG, 0);
 
+
         //read value from ECHO pin
 
         double startTime = 0;
         double endTime = 0;
-        double timeOut = time_time() + 2.0;
+        double timeOut = time_time() + 0.5;
         //pulse in
+        value = gpioRead(GPIO_ECHO);
         while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut)
         {
             //printf("[DEBUG] low value: %d\n", gpioRead(GPIO_ECHO));
@@ -62,12 +64,12 @@ int main(int argc, char *argv[])
             double diffTime = endTime - startTime;
             printf("[DEBUG] diffTime: %lf\n", diffTime);
 
-            distance = diffTime * 340 / 2; 
+            distance = ((endTime - startTime)*340*100)/2;; 
             printf("Distance: %lfcm\n", distance);
         }
         else
         {
-            printf("timeout\n");
+            printf("/!\\ timeout\n");
         }
 
         time_sleep(1);
