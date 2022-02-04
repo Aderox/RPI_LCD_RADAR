@@ -34,8 +34,14 @@ void pulseIn(int gpio, int level, uint32_t tick)
     return;
 }
 
+long getMicrotime(){
+  struct timeval currentTime;
+  gettimeofday(&currentTime, NULL);
+  
+  return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
+}
+
 void poke(){
-    usleep(1);
     gpioWrite(GPIO_TRIG, 1);
     usleep(10);
     gpioWrite(GPIO_TRIG, 0);
@@ -68,66 +74,52 @@ int main(int argc, char *argv[])
         //supply power to vcc in order to start measurement and sleep 10 us
         poke();
 
-        uint32_t start = 0;
+        
+        int echo, previousEcho, lowHigh, highLow;
+        long startTime, stopTime, difference;
+        float rangeCm;
+        lowHigh = highLow = echo = previousEcho = 0;
+        while(0 == lowHigh || highLow == 0) {
+            previousEcho = echo;
+            echo = digitalRead(GPIO_ECHO);
+            if(0 == lowHigh && 0 == previousEcho && 1 == echo) {
+            lowHigh = 1;
+            startTime = getMicrotime();
+            }
+            if(1 == lowHigh && 1 == previousEcho && 0 == echo) {
+            highLow = 1;
+            stopTime = getMicrotime();
+            }
+        }
+        difference = stopTime - startTime;
+        rangeCm = difference / 58;
+        printf("Start: %ld, stop: %ld, difference: %ld, range: %.2f cm\n", startTime, stopTime, difference, rangeCm);
+        
+
+        /*uint32_t start = 0;
         uint32_t end = 0;
         while(gpioRead(GPIO_ECHO) == 0){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en haut
-            usleep(1);
         }
         start = time_time();
         while(gpioRead(GPIO_ECHO) == 1){
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en bas
-            usleep(1);
         }
         end = time_time();
         printf("[INFO] Différence entre les deux: %f   us\n", (end - start));
 
         time_sleep(3);
-       /* uint32_t start = gpioTick();
+       
+       
+        uint32_t start = gpioTick();
         time_sleep(3);
         uint32_t end = gpioTick();
         printf("[INFO] Différence entre les deux: %zu\n", (end - start));
-       */ 
+       *
+      */
         
-        
-        /*
-    
-        //read value from ECHO pin
-
-        double startTime = 0;
-        double endTime = 0;
-        double timeOut = time_time() + 1;
-        //pulse in
-        value = gpioRead(GPIO_ECHO);
-        while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut)
-        {
-            printf("[DEBUG] %d\n", gpioRead(GPIO_ECHO));
-            startTime = time_time();
-        }
-        while(gpioRead(GPIO_ECHO) == 1 && time_time() < timeOut)
-        {
-            printf("[DEBUG] %d\n", gpioRead(GPIO_ECHO));
-            endTime = time_time();
-        }
-
-        if(time_time() < timeOut)
-        {
-            double diffTime = endTime - startTime;
-            printf("[DEBUG] diffTime: %lf\n", diffTime);
-
-            //distance = ((endTime - startTime)*340*100)/2;; 
-            distance = diffTime / 0.000058;
-            printf("Distance: %lfcm\n", distance);
-        }
-        else
-        {
-            printf("/!\\ timeout\n");
-        }
-
-        time_sleep(1);
-        */
     }
 
     gpioTerminate();
