@@ -578,6 +578,8 @@ int main(int argc, char *argv[])
 	const int mSPF = 33; // 30 fps = 1/30*1000 = 33.33ms per frame
 
 	int i = 0;
+
+	lcd_fillRGB(0x00, 0x00, 0x00);
 	while (1)
 	{
 
