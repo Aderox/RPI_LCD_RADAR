@@ -581,7 +581,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 
-		/*
+		
 		lcd_img("radar.bmp", 0, 0);
 
 
@@ -594,7 +594,7 @@ int main(int argc, char *argv[])
 		if (angle >= 360)
 			angle = 0;
 		//printf("angle: %f\n", angle);
-		*/
+		
 
 		seconde += mSPF;
 		imgpersec++;
