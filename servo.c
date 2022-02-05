@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
     printf("servo moteur script: \n");
     // gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     int i = 0;
+    int pulseWidth = 0;
     while (1)
     {
 
@@ -46,14 +47,14 @@ int main(int argc, char *argv[])
         {
             gpioServo(GPIO_SERVO, (100 * i));
             //on choppe la position et on render
-            int pulseWidth = gpioGetServoPulsewidth(GPIO_SERVO);
+            pulseWidth = gpioGetServoPulsewidth(GPIO_SERVO);
             printf("pulseWidth: %d \n", pulseWidth);
             time_sleep(0.1);
         }
         for (int i = 25; i >= 5; i--)
         {
             gpioServo(GPIO_SERVO, (100 * i));
-            int pulseWidth = gpioGetServoPulsewidth(GPIO_SERVO);
+            pulseWidth = gpioGetServoPulsewidth(GPIO_SERVO);
             printf("pulseWidth: %d \n", pulseWidth);
             time_sleep(0.1);
         }
