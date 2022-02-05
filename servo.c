@@ -38,17 +38,16 @@ int main(int argc, char *argv[])
 
     printf("servo moteur script: \n");
     // gpioSetAlertFunc(GPIO_ECHO, pulseIn);
+    int i = 0;
     while (1)
     {
+
         printf("cycle \n");
-        gpioServo(GPIO_SERVO, 500);
-        time_sleep(1);
-
-        gpioServo(GPIO_SERVO, 1000);
-        time_sleep(1);
-
-        gpioServo(GPIO_SERVO, 1500);
-        time_sleep(1);
+        gpioServo(GPIO_SERVO, i);
+        i++;
+        if(i>2500)
+            i=0;
+        time_sleep(0.1);
     }
 
     printf("ciao \n");
