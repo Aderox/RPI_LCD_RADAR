@@ -10,8 +10,8 @@
 #include <pigpio.h>
 #include <math.h>
 
-#define GPIO_TRIG 6 //fil rouge
-#define GPIO_ECHO 5 //fil marron
+#define GPIO_TRIG 6 //fil bleu
+#define GPIO_ECHO 5 //fil blanc
 
 void pulseIn(int gpio, int level, uint32_t tick)
 {
@@ -79,17 +79,20 @@ int main(int argc, char *argv[])
         double end = 0;
         double timeOut = time_time() + 1;
         while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
+            printf("%d\n", gpioRead(GPIO_ECHO));
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en haut
         }
         start = time_time();
-        end  = 0;
         while(gpioRead(GPIO_ECHO) == 1 && time_time() < timeOut){
+            printf("%d\n", gpioRead(GPIO_ECHO));
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en bas
         }
         end = time_time();
         if(time_time() < timeOut){
+            printf("fin !\n");
+            time_sleep(0.5);
             distance = (end - start)/0.58;
             printf("[INFO] Distance: %f\n", distance);
             printf("end: %f \n", end);
@@ -100,10 +103,7 @@ int main(int argc, char *argv[])
         }
        
 
-        time_sleep(3);
-       
-       
-
+        time_sleep(2);
 
         
     }
