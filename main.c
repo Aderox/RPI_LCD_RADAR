@@ -601,7 +601,7 @@ int main(int argc, char *argv[])
 			imgpersec = 0;
 			seconde = 0;
 		}
-		if (seconde % 2 == 0)
+		if ((int)seconde % 2 == 0)
 		{
 			printf("pair !\n");
 			distance = meusureDistance();
