@@ -591,7 +591,7 @@ int main(int argc, char *argv[])
 		angle += 4;
 		if (angle >= 360)
 			angle = 0;
-		printf("angle: %f\n", angle);
+		//printf("angle: %f\n", angle);
 
 		seconde += mSPF;
 		imgpersec++;
@@ -601,9 +601,9 @@ int main(int argc, char *argv[])
 			imgpersec = 0;
 			seconde = 0;
 		}
-		if ((int)seconde % 2 == 0)
+		if ((int)seconde % 4 == 0)
 		{
-			printf("pair !\n");
+			//printf("pair !\n");
 			distance = meusureDistance();
 			if (distance > 0)
 			{
