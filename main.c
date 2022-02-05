@@ -618,7 +618,7 @@ int main(int argc, char *argv[])
 				printf("[ERROR] timout: %fcm\n", distance);
 			}
 		}
-		time_sleep(mSPF);
+		time_sleep(mSPF/1000);
 	}
 	lcd_close();
 }
