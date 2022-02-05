@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
         poke();
         while (time_time() < timeOut)
         {
-            i = gpioRead(GPIO_ECHO);
+            i += gpioRead(GPIO_ECHO);
             printf("%d\n", gpioRead(GPIO_ECHO));
         }
         printf("expired. nb yes: %d\n", i);
