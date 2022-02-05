@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
         startTick = gpioTick();
         time_sleep(0.5);
         endTick  = gpioTick();
-        diffTick = end - start;
+        diffTick = endTick - startTick;
         printf("time nul: %f\n", diffTick/1e6);
 
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
