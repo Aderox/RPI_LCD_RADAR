@@ -617,7 +617,7 @@ int main(int argc, char *argv[])
 
 				}else{
 					printf("on met un point\n");
-					POINT detected = {center.x, center.y + (154*distance/400)};
+					POINT detected = {center.x, center.y + (distance/2.56)};
 					lcd_fillframeRGB(detected.x, detected.y, 5, 5, 0xFF, 0x00, 0x00);
 				}
 			}
