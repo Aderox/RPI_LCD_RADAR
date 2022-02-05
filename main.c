@@ -523,7 +523,7 @@ void rotateAroundCenter(POINT A, POINT center, float angle)
 
 int main(int argc, char *argv[])
 {
-	/**/
+	/*
 	lcd_open();
 
 	gpioSetMode(GPIO_TRIG, PI_OUTPUT);
@@ -554,6 +554,10 @@ int main(int argc, char *argv[])
 	lcd_fillRGB(0x00, 0x00, 0x00);
 	// 24bit Bitmap only
 	lcd_img("radar.bmp", 0, 0);
+	
+	UNCOMENT */
+
+	r = gpioInitialise();
 
 	/*
 	milieu du radar 156;156
@@ -589,7 +593,7 @@ int main(int argc, char *argv[])
 			angle = 0;
 		//printf("angle: %f\n", angle);
 		*/
-	
+
 		seconde += mSPF;
 		imgpersec++;
 		if (seconde >= 1000)
