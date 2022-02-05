@@ -113,8 +113,7 @@ int main(int argc, char *argv[])
         diffTick = endTick - startTick;
         printf("[DEBUG] Time: %fms\n", diffTick);
         
-        distance = (diffTick/1e6)*340.0; // v = d/t => d = v*t => d = 340m/s * (diffTick/1e6) (microsecondes) DONC distance en metre
-        printf("[INFO] Distance: %fcm\n", distance/100);
+        printf("[INFO] Distance: %fcm\n", diffTick/58);
         /*
         * DEBUG TO TEST TICK
         */
