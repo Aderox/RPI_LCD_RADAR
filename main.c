@@ -579,6 +579,8 @@ int main(int argc, char *argv[])
 
 	double distance = 0;
 	const int mSPF = 33; // 30 fps = 1/30*1000 = 33.33ms per frame
+
+	int i = 0;
 	while (1)
 	{
 
@@ -605,7 +607,7 @@ int main(int argc, char *argv[])
 			imgpersec = 0;
 			seconde = 0;
 		}
-		if ((int)seconde % 4 == 0)
+		if (i % 11  == 0)
 		{
 			//printf("pair !\n");
 			distance = meusureDistance();
@@ -617,7 +619,9 @@ int main(int argc, char *argv[])
 			{
 				printf("[ERROR] timout: %fcm\n", distance);
 			}
+			i=0;
 		}
+		i++;
 		time_sleep(mSPF/1000);
 	}
 	lcd_close();
