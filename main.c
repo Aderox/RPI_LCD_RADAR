@@ -422,6 +422,10 @@ int main(int argc,char *argv[]) {
 
 	lcd_init();
 
+	gpioSetMode(GPIO_TRIG, PI_OUTPUT);
+    gpioSetMode(GPIO_ECHO, PI_INPUT);
+
+
 	lcd_fill(0); //black out the screen.
 
 	lcd_fillRGB(0xFF, 0x00, 0x00);
