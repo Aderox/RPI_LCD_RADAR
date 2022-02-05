@@ -44,25 +44,10 @@ int main(int argc, char *argv[])
         gpioServo(GPIO_SERVO, 500);
         time_sleep(1);
 
-        gpioServo(GPIO_SERVO, 500);
-        time_sleep(0.5);
-        gpioServo(GPIO_SERVO, 1000);
-        time_sleep(0.5);
-        gpioServo(GPIO_SERVO, 1500);
-        time_sleep(0.5);
-        gpioServo(GPIO_SERVO, 2000);
-        time_sleep(0.5);
-        gpioServo(GPIO_SERVO, 2500);
-        time_sleep(0.5);
-        gpioServo(GPIO_SERVO, 2400);
-        time_sleep(0.5);
-        gpioServo(GPIO_SERVO, 500);
-        time_sleep(1);
-
         printf("cycle \n");
-        for(int i = 0; i<=5; i++)
+        for(int i = 0; i<=(25); i++)
         {
-            gpioServo(GPIO_SERVO, 500*i);
+            gpioServo(GPIO_SERVO, (100*i);
             time_sleep(0.1);
         }
     }
