@@ -587,7 +587,7 @@ int main(int argc, char *argv[])
 	const int mSPF = 33; // 30 fps = 1/30*1000 = 33.33ms per frame
 
 	int i = 0;
-
+	int angleServo = 0;
 	lcd_fillRGB(0x00, 0x00, 0x00);
 	while (1)
 	{
@@ -599,13 +599,12 @@ int main(int argc, char *argv[])
 		// center
 		lcd_fillframeRGB(center.x, center.y, 1, 1, 0xFF, 0xFF, 0xFF);
 
-		rotateAroundCenter(A, center, angle);
-
+		/*
 		angle += 4;
 		if (angle >= 360)
 			angle = 0;
 		//printf("angle: %f\n", angle);
-		
+		*/
 
 		seconde += mSPF;
 		imgpersec++;
@@ -621,6 +620,10 @@ int main(int argc, char *argv[])
         for (int i = 5; i <= 25; i++)
         {
             gpioServo(GPIO_SERVO, (100 * i));
+
+			//get position of servo then use f(x) = 0.09x-45 to get angle in degree then rotateAroundCenter
+			angleServo = gpioGetServoPulsewidth(GPIO_SERVO);
+			rotateAroundCenter(A, center, 0.09 * angleServo - 45);
 			distance = meusureDistance();
 			if (distance > 0)
 			{
@@ -641,7 +644,10 @@ int main(int argc, char *argv[])
         }
         for (int i = 25; i >= 5; i--)
         {
-            gpioServo(GPIO_SERVO, (100 * i));
+			gpioServo(GPIO_SERVO, (100 * i));
+			
+			angleServo = gpioGetServoPulsewidth(GPIO_SERVO);
+			rotateAroundCenter(A, center, 0.09 * angleServo - 45);
 			distance = meusureDistance();
 			if (distance > 0)
 			{
