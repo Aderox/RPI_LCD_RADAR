@@ -78,7 +78,22 @@ int main(int argc, char *argv[])
         double start = 0;
         double end = 0;
         double timeOut = time_time() + 1;
-        while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
+        
+        while(time_time() < timeOut){
+            //printf("[INFO] time: %f \n", time_time());
+            //printf("[INFO] gpioRead: %d\n", gpioRead(GPIO_ECHO));
+            if(gpioRead(GPIO_ECHO) == 0){
+                start = time_time();
+                printf("[INFO] start: %f \n", start);
+            }
+            if(gpioRead(GPIO_ECHO) == 1){
+                end = time_time();
+                printf("[INFO] end: %f \n", end);
+            }
+        }
+        distance = (end - start) / 0.58;
+        printf("[INFO] distance: %f \n", distance);
+        /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
             //on attend que le signal soit en haut
@@ -101,7 +116,7 @@ int main(int argc, char *argv[])
         else{
             printf("[ERROR] Timeout\n");
         }
-       
+       */
 
         time_sleep(2);
 
