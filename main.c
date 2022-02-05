@@ -623,7 +623,8 @@ int main(int argc, char *argv[])
 
 			//get position of servo then use f(x) = 0.09x-45 to get angle in degree then rotateAroundCenter
 			angleServo = gpioGetServoPulsewidth(GPIO_SERVO);
-			rotateAroundCenter(A, center, 0.09 * angleServo - 45);
+			angle = (0.09 * angleServo) - 45;
+			rotateAroundCenter(A, center, angle);
 			distance = meusureDistance();
 			if (distance > 0)
 			{
@@ -632,7 +633,7 @@ int main(int argc, char *argv[])
 
 				}else{
 					printf("on met un point\n");
-					POINT detected = {center.x, center.y + (distance/2.56)};
+					POINT detected = {center.x + cos(angle), center.y + (distance/2.56)}; //2.56 pour la limite du radar
 					lcd_fillframeRGB(detected.x, detected.y, 5, 5, 0xFF, 0x00, 0x00);
 				}
 			}
@@ -647,7 +648,8 @@ int main(int argc, char *argv[])
 			gpioServo(GPIO_SERVO, (100 * i));
 			
 			angleServo = gpioGetServoPulsewidth(GPIO_SERVO);
-			rotateAroundCenter(A, center, 0.09 * angleServo - 45);
+			angle = (0.09 * angleServo) - 45;
+			rotateAroundCenter(A, center, angle+1); //+1 pour un décalage
 			distance = meusureDistance();
 			if (distance > 0)
 			{
@@ -656,7 +658,7 @@ int main(int argc, char *argv[])
 
 				}else{
 					printf("on met un point\n");
-					POINT detected = {center.x, center.y + (distance/2.56)};
+					POINT detected = {center.x + cos(angle), center.y + (distance/2.56)};
 					lcd_fillframeRGB(detected.x, detected.y, 5, 5, 0xFF, 0x00, 0x00);
 				}
 			}
