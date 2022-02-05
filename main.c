@@ -23,6 +23,7 @@
 #include <pigpio.h>
 #include <math.h>  
 #include "main.h"
+#include "hcsr04.h"
 
 #define PI 3.14159265358979323846
 #define DEG2RAD(x) ((x) * PI / 180)
@@ -443,9 +444,20 @@ int main(int argc,char *argv[]) {
 	int imgpersec = 0;
 	float seconde = 0;
 
+	long distance = 0;
 	const int mSPF = 33; //30 fps = 1/30*1000 = 33.33ms per frame
 	while(1){
 		lcd_img("radar.bmp", 0, 0);
+
+		distance = meusureDistance();
+        if(distance > 0)
+        {
+            printf("distance: %fcm\n", distance);
+        }
+        else
+        {
+            printf("[ERROR] timout: %fcm\n", distance);
+        }
 
 		//point 0;0
 		//lcd_fillframeRGB(0, 0, 5, 5, 0xFF, 0xFF, 0xFF);
@@ -466,7 +478,7 @@ int main(int argc,char *argv[]) {
 		seconde+=mSPF;
 		imgpersec++;
 		if(seconde >= 1000){
-			printf("========imgpersec: %d==========\n", imgpersec);
+			printf("[INFO] FPS:%d\n", imgpersec);
 			imgpersec = 0;
 			seconde = 0;
 		}
