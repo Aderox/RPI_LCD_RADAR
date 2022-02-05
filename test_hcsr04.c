@@ -87,6 +87,8 @@ int main(int argc, char *argv[])
         int i = 0;
         int wasHigh = 0;
 
+        float distance = 0;
+
         printf("\nPOKE\n");
         poke();
         while (time_time() < timeOut)
@@ -111,6 +113,8 @@ int main(int argc, char *argv[])
         diffTick = endTick - startTick;
         printf("[INFO] Time: %f\n", diffTick);
 
+        distance = diffTick / 0.58;
+        printf("[INFO] Distance: %fua\n", distance);
         /*
         * DEBUG TO TEST TICK
         */
