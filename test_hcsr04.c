@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
         double end = 0;
         double timeOut = time_time() + 1;
         int i = 0;
+        int wasHigh = 0;
 
         for (int i = 0; i < 10; i++)
         {
@@ -89,10 +90,18 @@ int main(int argc, char *argv[])
         poke();
         while (time_time() < timeOut)
         {
-            i += gpioRead(GPIO_ECHO);
-            printf("%d\n", gpioRead(GPIO_ECHO));
+            if(gpioRead(GPIO_ECHO) == 1)
+            {
+                start = getMicrotime();
+                wasHigh = 1;
+            }
+            if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
+            {
+                end = getMicrotime();
+                break;
+            }
         }
-        printf("expired. nb yes: %d\n", i);
+        printf("expired. time: %f\n", end-start);
 
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
