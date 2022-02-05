@@ -76,54 +76,49 @@ int main(int argc, char *argv[])
     // gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     while (1)
     {
-        printf("lessgo :");
         // supply power to vcc in order to start measurement and sleep 10 us
 
            
-        uint32_t startTick;
-        uint32_t endTick;
+        double startTick;
+        double endTick;
         float diffTick;
         
-        uint32_t timeOut = gpioTick() + (1.5*1e6);
+        double timeOut = time_time() + (1.5);
         int i = 0;
         int wasHigh = 0;
 
-        for (int i = 0; i < 10; i++)
-        {
-            printf("%d\n", gpioRead(GPIO_ECHO));
-        }
-        printf("POKE\n");
+        printf("\nPOKE\n");
         poke();
-        while (gpioTick() < timeOut)
+        while (time_time() < timeOut)
         {
             if(gpioRead(GPIO_ECHO) == 1)
             {
-                startTick = gpioTick();
+                startTick = time_time();
                 //printf("[DEBUG] startTick: %f\n", start);
                 wasHigh = 1;
             }
             if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
             {
-                endTick = gpioTick();
-                printf("[DEBUG] End tick meusure:%"PRIu32"\n", endTick);
+                endTick = time_time();
+                printf("[DEBUG] End tick meusure:%d\n", endTick);
                 break;
             }
         }
         diffTick = endTick - startTick;
-        printf("[INFO] Time: %f\n", diffTick/1e6);
+        printf("[INFO] Time: %f\n", diffTick);
 
         /*
         * DEBUG TO TEST TICK
         */
-        startTick = gpioTick();
+        startTick = time_time();
         //print start tick
-        printf("[DEBUG] Start tick:%"PRIu32"\n", startTick);
-        usleep(0.5*1e6);
-        endTick  = gpioTick();
+        printf("[DEBUG] Start tick:%d\n", startTick);
+        time_sleep(0.5);
+        endTick  = time_time();
         //print end tick
-        printf("[DEBUG] End tick:%"PRIu32"\n", endTick);
+        printf("[DEBUG] End tick:%d\n", endTick);
         diffTick = endTick - startTick;
-        printf("time nul: %f\n", diffTick/1e6);
+        printf("time nul: %f\n\n", diffTick);
 
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
