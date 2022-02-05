@@ -110,6 +110,7 @@ int main(int argc, char *argv[])
         /*
         * DEBUG TO TEST TICK
         */
+       printf("==on teste==\n");
         startTick = time_time();
         //print start tick
         printf("[DEBUG] Start tick:%d\n", startTick);
@@ -119,6 +120,7 @@ int main(int argc, char *argv[])
         printf("[DEBUG] End tick:%d\n", endTick);
         diffTick = endTick - startTick;
         printf("time nul: %f\n\n", diffTick);
+       printf("fin du test\n");
 
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
