@@ -620,6 +620,8 @@ int main(int argc, char *argv[])
 
         for (int i = 5; i <= 25; i++)
         {
+					lcd_fillframeRGB(0,0,10,10,0xFF,0x00,0xFF);
+
             gpioServo(GPIO_SERVO, (100 * i));
 
 			//get position of servo then use f(x) = 0.09x-45 to get angle in degree then rotateAroundCenter
