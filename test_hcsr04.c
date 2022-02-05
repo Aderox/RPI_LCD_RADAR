@@ -10,6 +10,9 @@
 #include <pigpio.h>
 #include <math.h>
 
+#include <inttypes.h>
+
+
 #define GPIO_TRIG 6 // fil bleu
 #define GPIO_ECHO 5 // fil blanc
 
@@ -79,7 +82,7 @@ int main(int argc, char *argv[])
            
         uint32_t startTick;
         uint32_t endTick;
-        int diffTick;
+        float diffTick;
         
         uint32_t timeOut = gpioTick() + (1.5*1e6);
         int i = 0;
@@ -102,21 +105,23 @@ int main(int argc, char *argv[])
             if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
             {
                 endTick = gpioTick();
-                printf("[DEBUG] endTick: %f\n", endTick);
+                printf("[DEBUG] End tick meusure:%"PRIu32"\n", endTick);
                 break;
             }
         }
         diffTick = endTick - startTick;
         printf("[INFO] Time: %f\n", diffTick/1e6);
 
-
+        /*
+        * DEBUG TO TEST TICK
+        */
         startTick = gpioTick();
         //print start tick
-        printf("[INFO] Start tick: %f\n", startTick);
+        printf("[DEBUG] Start tick:%"PRIu32"\n", startTick);
         usleep(0.5*1e6);
         endTick  = gpioTick();
         //print end tick
-        printf("[INFO] End tick: %f\n", endTick);
+        printf("[DEBUG] End tick:%"PRIu32"\n", endTick);
         diffTick = endTick - startTick;
         printf("time nul: %f\n", diffTick/1e6);
 
