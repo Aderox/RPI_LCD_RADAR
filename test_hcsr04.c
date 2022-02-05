@@ -76,9 +76,11 @@ int main(int argc, char *argv[])
         printf("lessgo :");
         // supply power to vcc in order to start measurement and sleep 10 us
 
-        time_t  startTick;
-        time_t  endTick;
-        double diffTick;
+           
+        clock_t start;
+        clock_t end;
+        double cpu_time_used;
+        
         double timeOut = time_time() + 1;
         int i = 0;
         int wasHigh = 0;
@@ -93,26 +95,26 @@ int main(int argc, char *argv[])
         {
             if(gpioRead(GPIO_ECHO) == 1)
             {
-                startTick = time(NULL);
-                printf("[DEBUG] startTick: %d\n", startTick);
+                start = clock();
+                printf("[DEBUG] startTick: %f\n", start);
                 wasHigh = 1;
             }
             if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
             {
-                endTick = time(NULL);
-                printf("[DEBUG] endTick: %d\n", endTick);
+                stop = clock();
+                printf("[DEBUG] endTick: %f\n", end);
                 break;
             }
         }
-        diffTick = difftime(endTick, startTick);
-        printf("time : %ld\n", diffTick);
+        cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+        printf("time : %f\n", cpu_time_used);
 
 
-        startTick  = time(NULL);
+        start  = clock();
         time_sleep(0.2);
-        endTick  = time(NULL);
-        diffTick = difftime(endTick, startTick);
-        printf("time nul: %ld\n", diffTick);
+        end  = clock();
+        cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+        printf("time nul: %f\n", cpu_time_used);
 
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
