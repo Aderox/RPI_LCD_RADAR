@@ -77,9 +77,9 @@ int main(int argc, char *argv[])
         // supply power to vcc in order to start measurement and sleep 10 us
 
            
-        clock_t start;
-        clock_t end;
-        double cpu_time_used;
+        uint32_t startTick;
+        uint32_t endTick;
+        int diffTick;
         
         double timeOut = time_time() + 1;
         int i = 0;
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
         }
         printf("POKE\n");
         poke();
-        while (time_time() < timeOut)
+        /*while (time_time() < timeOut)
         {
             if(gpioRead(GPIO_ECHO) == 1)
             {
@@ -109,12 +109,12 @@ int main(int argc, char *argv[])
         cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
         printf("time : %f\n", cpu_time_used);
 
-
-        start  = clock();
-        time_sleep(0.2);
-        end  = clock();
-        cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-        printf("time nul: %f\n", cpu_time_used);
+*/
+        startTick = gpioTick();
+        time_sleep(0.5);
+        endTick  = gpioTick();
+        diffTick = end - start;
+        printf("time nul: %f\n", diffTick/1e6);
 
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
