@@ -26,8 +26,6 @@
 #include "hcsr04.h"
 
 #define PI 3.14159265358979323846
-#define DEG2RAD(x) ((x) * PI / 180)
-#define RAD2DEG(x) ((x) * 180 / PI)
 
 #define LCD_CS 1
 #define TOUCH_CS 0
@@ -37,6 +35,9 @@
 #define uint8_t unsigned char
 #define uint16_t unsigned int
 #define uint32_t unsigned long
+
+#define GPIO_TRIG 6 // fil bleu
+#define GPIO_ECHO 5 // fil blanc
 
 uint8_t lcd_rotations[4] = {
 	0b11101010,	//   0
@@ -366,30 +367,46 @@ void lcd_img(char *fname, uint16_t x, uint16_t y) {
 }
 
 
-void loop() {
 
-	//Update rotation
-	lcd_setrotation(lcd_rotation);
-
-	//Fill entire screen with new color
-	lcd_fillframe(0,0,lcd_w,lcd_h,colors[color]);
-
-	//Make a color+1 box, 5 pixels from the top-left corner, 20 pixels high, 95 (100-5) pixels from right border.
-	lcd_fillframe(5,5,lcd_w-100,20,colors[(color+1) & 0xF]);
-
-	//increment color
-	color++;
-	//if color is overflowed, reset to 0
-	if (color==16) {color=0;}
-
-	//increment rotation
-	lcd_rotation++;
-
-	//if rotation is overflowed, reset to 0
-	if (lcd_rotation==4) lcd_rotation=0;
-
-	delayms(500);
+void poke()
+{
+    gpioWrite(GPIO_TRIG, 1);
+    usleep(10);
+    gpioWrite(GPIO_TRIG, 0);
 }
+
+long meusureDistance()
+{
+    uint32_t startTick;
+    uint32_t endTick;
+    float diffTick;
+
+    double timeOut = time_time() + (1.5);
+    int wasHigh = 0;
+
+    printf("\nPOKE\n");
+    poke();
+    while (time_time() < timeOut)
+    {
+        if (gpioRead(GPIO_ECHO) == 1)
+        {
+            if (!wasHigh)
+            {
+                startTick = gpioTick();
+                wasHigh = 1;
+            }
+            wasHigh = 1;
+        }
+        if (gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
+        {
+            endTick = gpioTick();
+            diffTick = endTick - startTick;
+            return diffTick/58.0;
+        }
+    }
+    return -1;
+}
+
 
 void rotateAroundCenter(POINT A, POINT center, float angle) {
 	for(float i = 1; i < 302; i++){
