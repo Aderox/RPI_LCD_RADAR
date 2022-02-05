@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     // gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     while (1)
     {
-        
+        printf("cycle \n");
         gpioServo(GPIO_SERVO, 500);
         time_sleep(1);
 
