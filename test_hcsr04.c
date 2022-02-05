@@ -79,8 +79,8 @@ int main(int argc, char *argv[])
         // supply power to vcc in order to start measurement and sleep 10 us
 
            
-        double startTick;
-        double endTick;
+        uint32_t startTick;
+        uint32_t endTick;
         float diffTick;
         
         double timeOut = time_time() + (1.5);
@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
             {
                 if(!wasHigh)
                 {
-                    startTick = time_time();
+                    startTick = gpioTick();
                     wasHigh = 1;
                 }
                 //printf("[DEBUG] startTick: %f\n", start);
@@ -105,15 +105,15 @@ int main(int argc, char *argv[])
             }
             if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
             {
-                endTick = time_time();
+                endTick = gpioTick();
                 printf("[DEBUG] End tick meusure:%d\n", endTick);
                 break;
             }
         }
         diffTick = endTick - startTick;
-        printf("[INFO] Time: %f\n", diffTick);
+        printf("[DEBUG] Time: %f\n", diffTick);
 
-        distance = diffTick / 0.58;
+        distance = diffTick * 340.0 / 2.0;
         printf("[INFO] Distance: %fua\n", distance);
         /*
         * DEBUG TO TEST TICK
