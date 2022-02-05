@@ -613,6 +613,12 @@ int main(int argc, char *argv[])
 			if (distance > 0)
 			{
 				printf("distance: %fcm\n", distance);
+				if(distance > 400){
+
+				}else{
+					POINT detected = {0, 154*distance/4};
+					lcd_fillframeRGB(detected.x, detected.y, 2, 2, 0xFF, 0x00, 0x00);
+				}
 			}
 			else
 			{
