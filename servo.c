@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-
+    printf("servo moteur script: \n");
     // gpioSetAlertFunc(GPIO_ECHO, pulseIn);
     while (1)
     {
