@@ -76,8 +76,9 @@ int main(int argc, char *argv[])
         printf("lessgo :");
         // supply power to vcc in order to start measurement and sleep 10 us
 
-        double start = 0;
-        double end = 0;
+        uint32_t startTick;
+        uint32_t endTick;
+        int diffTick;
         double timeOut = time_time() + 1;
         int i = 0;
         int wasHigh = 0;
@@ -92,16 +93,19 @@ int main(int argc, char *argv[])
         {
             if(gpioRead(GPIO_ECHO) == 1)
             {
-                start = getMicrotime();
+                startTick = gpioTick();
+                printf("[DEBUG] startTick: %d\n", startTick);
                 wasHigh = 1;
             }
             if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
             {
-                end = getMicrotime();
+                endTick = gpioTick();
+                printf("[DEBUG] endTick: %d\n", endTick);
                 break;
             }
         }
-        printf("expired. time: %f\n", end-start);
+        diffTick = endTick - startTick;
+        printf("expired. time: %f\n", diffTick);
 
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
