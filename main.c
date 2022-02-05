@@ -537,7 +537,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "pigpio set pwm frequency failed\n");
         return 1;
     }
-	
+
 	lcd_init();
 
 	lcd_fill(0); // black out the screen.
@@ -617,20 +617,10 @@ int main(int argc, char *argv[])
 		}
 
 		printf("cycle \n");
+
         for (int i = 5; i <= 25; i++)
         {
             gpioServo(GPIO_SERVO, (100 * i));
-            time_sleep(0.1);
-        }
-        for (int i = 25; i >= 5; i--)
-        {
-            gpioServo(GPIO_SERVO, (100 * i));
-            time_sleep(0.1);
-        }
-
-		if (i % 2  == 0)
-		{
-			//printf("pair !\n");
 			distance = meusureDistance();
 			if (distance > 0)
 			{
@@ -647,9 +637,31 @@ int main(int argc, char *argv[])
 			{
 				printf("[ERROR] timout: %fcm\n", distance);
 			}
-			i=0;
-		}
-		i++;
+            time_sleep(0.1);
+        }
+        for (int i = 25; i >= 5; i--)
+        {
+            gpioServo(GPIO_SERVO, (100 * i));
+			distance = meusureDistance();
+			if (distance > 0)
+			{
+				printf("distance: %fcm\n", distance);
+				if(distance > 400){
+
+				}else{
+					printf("on met un point\n");
+					POINT detected = {center.x, center.y + (distance/2.56)};
+					lcd_fillframeRGB(detected.x, detected.y, 5, 5, 0xFF, 0x00, 0x00);
+				}
+			}
+			else
+			{
+				printf("[ERROR] timout: %fcm\n", distance);
+			}
+            time_sleep(0.1);
+        }
+
+
 		time_sleep(mSPF/1000);
 	}
 	lcd_close();
