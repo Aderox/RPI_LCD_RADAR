@@ -9,7 +9,6 @@
 #include <time.h>
 #include <pigpio.h>
 #include <math.h>
-
 #include <inttypes.h>
 
 #define GPIO_TRIG 6 // fil bleu
