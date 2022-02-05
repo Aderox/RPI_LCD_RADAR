@@ -593,11 +593,10 @@ int main(int argc, char *argv[])
 	{
 
 		
-		lcd_img("radar.bmp", 0, 0);
 
 
 		// center
-		lcd_fillframeRGB(center.x, center.y, 1, 1, 0xFF, 0xFF, 0xFF);
+		//lcd_fillframeRGB(center.x, center.y, 1, 1, 0xFF, 0xFF, 0xFF);
 
 		/*
 		angle += 4;
@@ -616,6 +615,8 @@ int main(int argc, char *argv[])
 		}
 
 		printf("cycle \n");
+		
+		lcd_img("radar.bmp", 0, 0);
 
         for (int i = 5; i <= 25; i++)
         {
@@ -643,13 +644,15 @@ int main(int argc, char *argv[])
 			}
             time_sleep(0.1);
         }
+
+		lcd_img("radar.bmp", 0, 0);
         for (int i = 25; i >= 5; i--)
         {
 			gpioServo(GPIO_SERVO, (100 * i));
 			
 			angleServo = gpioGetServoPulsewidth(GPIO_SERVO);
 			angle = (0.09 * angleServo) - 45;
-			rotateAroundCenter(A, center, angle+1); //+1 pour un décalage
+			rotateAroundCenter(A, center, angle);
 			distance = meusureDistance();
 			if (distance > 0)
 			{
