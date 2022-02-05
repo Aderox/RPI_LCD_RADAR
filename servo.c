@@ -43,9 +43,9 @@ int main(int argc, char *argv[])
     {
 
         printf("cycle \n");
-        gpioServo(GPIO_SERVO, 50*i);
+        gpioServo(GPIO_SERVO, 500*i);
         i++;
-        if(i>50)
+        if(i>5)
             i=0;
         time_sleep(0.1);
     }
