@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
             {
                 if(!wasHigh)
                 {
-                    startTick = gpioTick();
+                    startTick = time_time();
                     wasHigh = 1;
                 }
                 //printf("[DEBUG] startTick: %f\n", start);
@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
             }
             if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
             {
-                endTick = gpioTick();
+                endTick = time_time();
                 printf("[DEBUG] End tick meusure:%d\n", endTick);
                 break;
             }
