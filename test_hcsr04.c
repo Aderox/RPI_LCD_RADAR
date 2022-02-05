@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
         uint32_t endTick;
         int diffTick;
         
-        double timeOut = time_time() + 1;
+        uint32_t timeOut = gpioTick() + (1.5*1e6);
         int i = 0;
         int wasHigh = 0;
 
@@ -91,25 +91,25 @@ int main(int argc, char *argv[])
         }
         printf("POKE\n");
         poke();
-        /*while (time_time() < timeOut)
+        while (gpioTick() < timeOut)
         {
             if(gpioRead(GPIO_ECHO) == 1)
             {
-                start = clock();
-                printf("[DEBUG] startTick: %f\n", start);
+                startTick = gpioTick();
+                //printf("[DEBUG] startTick: %f\n", start);
                 wasHigh = 1;
             }
             if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
             {
-                end = clock();
-                printf("[DEBUG] endTick: %f\n", end);
+                endTick = gpioTick();
+                printf("[DEBUG] endTick: %f\n", endTick);
                 break;
             }
         }
-        cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-        printf("time : %f\n", cpu_time_used);
+        diffTick = endTick - startTick;
+        printf("[INFO] Time: %f\n", diffTick/1e6);
 
-*/
+
         startTick = gpioTick();
         usleep(0.5*1e6);
         endTick  = gpioTick();
