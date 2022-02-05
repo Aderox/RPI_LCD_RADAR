@@ -111,8 +111,12 @@ int main(int argc, char *argv[])
 
 
         startTick = gpioTick();
+        //print start tick
+        printf("[INFO] Start tick: %f\n", startTick);
         usleep(0.5*1e6);
         endTick  = gpioTick();
+        //print end tick
+        printf("[INFO] End tick: %f\n", endTick);
         diffTick = endTick - startTick;
         printf("time nul: %f\n", diffTick/1e6);
 
