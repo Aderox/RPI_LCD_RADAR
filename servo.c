@@ -40,13 +40,14 @@ int main(int argc, char *argv[])
     int i = 0;
     while (1)
     {
-        gpioServo(GPIO_SERVO, 0);
-        time_sleep(1);
-        gpioServo(GPIO_SERVO, 500);
-        time_sleep(1);
 
         printf("cycle \n");
-        for (int i = 0; i <= 25; i++)
+        for (int i = 5; i <= 25; i++)
+        {
+            gpioServo(GPIO_SERVO, (100 * i));
+            time_sleep(0.1);
+        }
+        for (int i = 25; i >= 5; i--)
         {
             gpioServo(GPIO_SERVO, (100 * i));
             time_sleep(0.1);
