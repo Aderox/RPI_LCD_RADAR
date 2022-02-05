@@ -55,7 +55,7 @@ long meusureDistance()
 }
 
 
-/*
+
 int main(int argc, char *argv[])
 {
     printf("salut \n");
@@ -98,4 +98,3 @@ int main(int argc, char *argv[])
     printf("ciao \n");
     gpioTerminate();
 }
-*/
