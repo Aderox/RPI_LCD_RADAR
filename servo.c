@@ -54,6 +54,8 @@ int main(int argc, char *argv[])
         time_sleep(0.5);
         gpioServo(GPIO_SERVO, 2500);
         time_sleep(0.5);
+        gpioServo(GPIO_SERVO, 3000);
+        time_sleep(0.5);
         gpioServo(GPIO_SERVO, 500);
         time_sleep(1);
 
