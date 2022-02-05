@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
             }
             if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
             {
-                stop = clock();
+                end = clock();
                 printf("[DEBUG] endTick: %f\n", end);
                 break;
             }
