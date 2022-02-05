@@ -42,6 +42,19 @@ int main(int argc, char *argv[])
     while (1)
     {
 
+        gpioServo(GPIO_SERVO, 500);
+        time_sleep(0.5);
+        gpioServo(GPIO_SERVO, 1000);
+        time_sleep(0.5);
+        gpioServo(GPIO_SERVO, 1500);
+        time_sleep(0.5);
+        gpioServo(GPIO_SERVO, 2000);
+        time_sleep(0.5);
+        gpioServo(GPIO_SERVO, 2500);
+        time_sleep(0.5);
+        gpioServo(GPIO_SERVO, 500);
+        time_sleep(1);
+
         printf("cycle \n");
         gpioServo(GPIO_SERVO, 500*i);
         i++;
