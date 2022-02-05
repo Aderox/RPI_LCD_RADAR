@@ -592,7 +592,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 
-		
+		lcd_fillframeRGB(0,0,10,10,0xFF,0x00,0xFF);
 
 
 		// center
