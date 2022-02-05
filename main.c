@@ -523,12 +523,12 @@ void rotateAroundCenter(POINT A, POINT center, float angle)
 
 int main(int argc, char *argv[])
 {
-	/*
+	
 	lcd_open();
 
 	gpioSetMode(GPIO_TRIG, PI_OUTPUT);
 	gpioSetMode(GPIO_ECHO, PI_INPUT);
-
+	/*
 	lcd_init();
 
 	lcd_fill(0); // black out the screen.
@@ -556,10 +556,6 @@ int main(int argc, char *argv[])
 	lcd_img("radar.bmp", 0, 0);
 	
 	UNCOMENT */
-
-	int r = gpioInitialise();
-	gpioSetMode(GPIO_TRIG, PI_OUTPUT);
-	gpioSetMode(GPIO_ECHO, PI_INPUT);
 
 
 	/*
