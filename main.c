@@ -38,6 +38,8 @@
 
 #define GPIO_TRIG 6 // fil bleu
 #define GPIO_ECHO 5 // fil blanc
+#define GPIO_SERVO 13 // fil gris
+
 
 uint8_t lcd_rotations[4] = {
 	0b11101010, //   0
@@ -528,6 +530,13 @@ int main(int argc, char *argv[])
 
 	gpioSetMode(GPIO_TRIG, PI_OUTPUT);
 	gpioSetMode(GPIO_ECHO, PI_INPUT);
+	gpioSetMode(GPIO_SERVO, PI_OUTPUT);
+
+    if (gpioSetPWMfrequency(GPIO_SERVO, 50) < 0)
+    {
+        fprintf(stderr, "pigpio set pwm frequency failed\n");
+        return 1;
+    }
 	
 	lcd_init();
 
@@ -606,6 +615,19 @@ int main(int argc, char *argv[])
 			imgpersec = 0;
 			seconde = 0;
 		}
+
+		printf("cycle \n");
+        for (int i = 5; i <= 25; i++)
+        {
+            gpioServo(GPIO_SERVO, (100 * i));
+            time_sleep(0.1);
+        }
+        for (int i = 25; i >= 5; i--)
+        {
+            gpioServo(GPIO_SERVO, (100 * i));
+            time_sleep(0.1);
+        }
+
 		if (i % 2  == 0)
 		{
 			//printf("pair !\n");
