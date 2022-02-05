@@ -105,7 +105,14 @@ int main(int argc, char *argv[])
             }
         }
         diffTick = endTick - startTick;
-        printf("expired. time: %f\n", diffTick);
+        printf("time: %f\n", diffTick);
+
+
+        startTick = gpioTick();
+        time_sleep(0.2);
+        endTick = gpioTick();
+        diffTick = endTick - startTick;
+        printf("time nul: %f\n", diffTick);
 
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
