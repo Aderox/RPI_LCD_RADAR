@@ -575,24 +575,21 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 
+		/*
 		lcd_img("radar.bmp", 0, 0);
 
-		// point 0;0
-		// lcd_fillframeRGB(0, 0, 5, 5, 0xFF, 0xFF, 0xFF);
 
 		// center
-		// lcd_fillframeRGB(center.x-5, center.y-5, 10, 10, 0xFF, 0x00, 0xFF);
 		lcd_fillframeRGB(center.x, center.y, 1, 1, 0xFF, 0xFF, 0xFF);
 
-		// A.x = cos((PI/180)*angle)*center.x;
-		// A.y = sin((PI/180)*angle)*center.y;
 		rotateAroundCenter(A, center, angle);
 
 		angle += 4;
 		if (angle >= 360)
 			angle = 0;
 		//printf("angle: %f\n", angle);
-
+		*/
+	
 		seconde += mSPF;
 		imgpersec++;
 		if (seconde >= 1000)
