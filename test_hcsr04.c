@@ -90,6 +90,8 @@ int main(int argc, char *argv[])
         {
             printf("%d\n", gpioRead(GPIO_ECHO));
         }
+        printf("expired");
+        
         /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
             printf("%d\n", gpioRead(GPIO_ECHO));
             //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
