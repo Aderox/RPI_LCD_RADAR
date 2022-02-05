@@ -93,7 +93,11 @@ int main(int argc, char *argv[])
         {
             if(gpioRead(GPIO_ECHO) == 1)
             {
-                startTick = time_time();
+                if(!wasHigh)
+                {
+                    startTick = gpioTick();
+                    wasHigh = 1;
+                }
                 //printf("[DEBUG] startTick: %f\n", start);
                 wasHigh = 1;
             }
