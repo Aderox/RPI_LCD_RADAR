@@ -41,6 +41,8 @@ int main(int argc, char *argv[])
     int i = 0;
     while (1)
     {
+        gpioServo(GPIO_SERVO, 500);
+        time_sleep(1);
 
         gpioServo(GPIO_SERVO, 500);
         time_sleep(0.5);
@@ -56,11 +58,11 @@ int main(int argc, char *argv[])
         time_sleep(1);
 
         printf("cycle \n");
-        gpioServo(GPIO_SERVO, 500*i);
-        i++;
-        if(i>5)
-            i=0;
-        time_sleep(0.1);
+        for(int i = 0; i=<5; i++)
+        {
+            gpioServo(GPIO_SERVO, 500*i);
+            time_sleep(0.1);
+        }
     }
 
     printf("ciao \n");
