@@ -558,6 +558,9 @@ int main(int argc, char *argv[])
 	UNCOMENT */
 
 	int r = gpioInitialise();
+	gpioSetMode(GPIO_TRIG, PI_OUTPUT);
+	gpioSetMode(GPIO_ECHO, PI_INPUT);
+
 
 	/*
 	milieu du radar 156;156
@@ -574,7 +577,7 @@ int main(int argc, char *argv[])
 	int imgpersec = 0;
 	float seconde = 0;
 
-	long distance = 0;
+	double distance = 0;
 	const int mSPF = 33; // 30 fps = 1/30*1000 = 33.33ms per frame
 	while (1)
 	{
@@ -615,7 +618,7 @@ int main(int argc, char *argv[])
 				printf("[ERROR] timout: %fcm\n", distance);
 			}
 		}
-		delayms(mSPF);
+		time_sleep(mSPF);
 	}
 	lcd_close();
 }

@@ -73,7 +73,6 @@ int main(int argc, char *argv[])
     printf("on bip:\n");
 
     double distance = 0;
-    int value = 0;
 
     printf("time: %f \n", time_time());
     // gpioSetAlertFunc(GPIO_ECHO, pulseIn);
