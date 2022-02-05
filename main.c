@@ -557,7 +557,7 @@ int main(int argc, char *argv[])
 	
 	UNCOMENT */
 
-	r = gpioInitialise();
+	int r = gpioInitialise();
 
 	/*
 	milieu du radar 156;156
