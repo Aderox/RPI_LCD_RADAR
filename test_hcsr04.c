@@ -12,45 +12,46 @@
 
 #include <inttypes.h>
 
-
 #define GPIO_TRIG 6 // fil bleu
 #define GPIO_ECHO 5 // fil blanc
-
-void pulseIn(int gpio, int level, uint32_t tick)
-{
-    uint32_t start = gpioTick();
-    uint32_t end = 0;
-
-    // printf("[INFO] Start pulseIn\n");
-    printf("[INFO] gpio %d\n", gpio);
-    printf("[INFO] Et pouf le signal est en haut (%d), a t=%f\n", level, start);
-    // unsigned long i = 0;
-    while (gpioRead(GPIO_ECHO) == 1)
-    { // TODO ADD TIMEOUT
-        printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
-        // on attend que le signal soit en bas
-        end = gpioTick();
-    }
-    // end = gpioTick();
-    printf("[INFO] fin du truc, a t=%f\n", end);
-    printf("[INFO] Différence entre les deux: %f\n", end - start);
-    printf("[INFO] Distance: %f\n", (end - start) / 0.58);
-    return;
-}
-
-long getMicrotime()
-{
-    struct timeval currentTime;
-    gettimeofday(&currentTime, NULL);
-
-    return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
-}
 
 void poke()
 {
     gpioWrite(GPIO_TRIG, 1);
     usleep(10);
     gpioWrite(GPIO_TRIG, 0);
+}
+
+long meusureDistance()
+{
+    uint32_t startTick;
+    uint32_t endTick;
+    float diffTick;
+
+    double timeOut = time_time() + (1.5);
+    int wasHigh = 0;
+
+    printf("\nPOKE\n");
+    poke();
+    while (time_time() < timeOut)
+    {
+        if (gpioRead(GPIO_ECHO) == 1)
+        {
+            if (!wasHigh)
+            {
+                startTick = gpioTick();
+                wasHigh = 1;
+            }
+            wasHigh = 1;
+        }
+        if (gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
+        {
+            endTick = gpioTick();
+            diffTick = endTick - startTick;
+            return diffTick/58.0;
+        }
+    }
+    return -1;
 }
 
 int main(int argc, char *argv[])
@@ -78,81 +79,16 @@ int main(int argc, char *argv[])
     {
         // supply power to vcc in order to start measurement and sleep 10 us
 
-           
-        uint32_t startTick;
-        uint32_t endTick;
-        float diffTick;
-        
-        double timeOut = time_time() + (1.5);
-        int i = 0;
-        int wasHigh = 0;
-
-        float distance = 0;
-
-        printf("\nPOKE\n");
-        poke();
-        while (time_time() < timeOut)
+        // measure distance
+        distance = meusureDistance();
+        if(distance > 0)
         {
-            if(gpioRead(GPIO_ECHO) == 1)
-            {
-                if(!wasHigh)
-                {
-                    startTick = gpioTick();
-                    wasHigh = 1;
-                }
-                //printf("[DEBUG] startTick: %f\n", start);
-                wasHigh = 1;
-            }
-            if(gpioRead(GPIO_ECHO) == 0 && wasHigh == 1)
-            {
-                endTick = gpioTick();
-                printf("[DEBUG] End tick meusure:%d\n", endTick);
-                break;
-            }
+            printf("distance: %f \n", distance);
         }
-        diffTick = endTick - startTick;
-        printf("[DEBUG] Time: %fms\n", diffTick);
-        
-        printf("[INFO] Distance: %fcm\n", diffTick/58);
-        /*
-        * DEBUG TO TEST TICK
-        */
-       printf("==on teste==\n");
-        startTick = time_time();
-        //print start tick
-        printf("[DEBUG] Start tick:%d\n", startTick);
-        time_sleep(0.5);
-        endTick  = time_time();
-        //print end tick
-        printf("[DEBUG] End tick:%d\n", endTick);
-        diffTick = endTick - startTick;
-        printf("time nul: %f\n\n", diffTick);
-       printf("fin du test\n");
-
-        /*while(gpioRead(GPIO_ECHO) == 0 && time_time() < timeOut){
-            printf("%d\n", gpioRead(GPIO_ECHO));
-            //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
-            //on attend que le signal soit en haut
+        else
+        {
+            printf("[ERROR] timout: %f \n", distance);
         }
-        start = time_time();
-        while(gpioRead(GPIO_ECHO) == 1 && time_time() < timeOut){
-            printf("%d\n", gpioRead(GPIO_ECHO));
-            //printf("[INFO] readGpio: %d\n", gpioRead(GPIO_ECHO));
-            //on attend que le signal soit en bas
-        }
-        end = time_time();
-        if(time_time() < timeOut){
-            printf("fin !\n");
-            time_sleep(0.5);
-            distance = (end - start)/0.58;
-            printf("[INFO] Distance: %f\n", distance);
-            printf("end: %f \n", end);
-            printf("[INFO] Différence entre les deux: %f   us\n", (end - start));
-        }
-        else{
-            printf("[ERROR] Timeout\n");
-        }
-       */
 
         time_sleep(2);
     }
