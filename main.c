@@ -633,10 +633,8 @@ int main(int argc, char *argv[])
 			{
 				printf("distance: %fcm\n", distance);
 				if(distance > 400){
-
 				}else{
-					printf("on met un point\n");
-					POINT detected = {center.x + cos(angle), center.y + (distance/2.56)}; //2.56 pour la limite du radar
+					POINT detected = {center.x + (156*cos(angle)), center.y + (distance/2.56)}; //2.56 pour la limite du radar
 					lcd_fillframeRGB(detected.x, detected.y, 5, 5, 0xFF, 0x00, 0x00);
 				}
 			}
@@ -660,10 +658,8 @@ int main(int argc, char *argv[])
 			{
 				printf("distance: %fcm\n", distance);
 				if(distance > 400){
-
 				}else{
-					printf("on met un point\n");
-					POINT detected = {center.x + cos(angle), center.y + (distance/2.56)};
+					POINT detected = {center.x + (156*cos(angle)), center.y + (distance/2.56)};
 					lcd_fillframeRGB(detected.x, detected.y, 5, 5, 0xFF, 0x00, 0x00);
 				}
 			}
