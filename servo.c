@@ -14,8 +14,7 @@
 #define GPIO_TRIG 6 // fil bleu
 #define GPIO_ECHO 5 // fil blanc
 
-#define GPIO_SERVO 13 //fil gris
-
+#define GPIO_SERVO 13 // fil gris
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +29,7 @@ int main(int argc, char *argv[])
 
     gpioSetMode(GPIO_SERVO, PI_OUTPUT);
 
-    if(gpioSetPWMfrequency(GPIO_SERVO, 50) < 0)
+    if (gpioSetPWMfrequency(GPIO_SERVO, 50) < 0)
     {
         fprintf(stderr, "pigpio set pwm frequency failed\n");
         return 1;
@@ -41,13 +40,15 @@ int main(int argc, char *argv[])
     int i = 0;
     while (1)
     {
+        gpioServo(GPIO_SERVO, 0);
+        time_sleep(1);
         gpioServo(GPIO_SERVO, 500);
         time_sleep(1);
 
         printf("cycle \n");
-        for(int i = 0; i<=(25); i++)
+        for (int i = 0; i <= 25; i++)
         {
-            gpioServo(GPIO_SERVO, (100*i);
+            gpioServo(GPIO_SERVO, (100 * i));
             time_sleep(0.1);
         }
     }
